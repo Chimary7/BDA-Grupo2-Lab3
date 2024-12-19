@@ -13,7 +13,6 @@ public class ValoracionService {
     private ValoracionRepository valoracionRepository;
 
     public Boolean saveValoracion(Valoracion valoracion) {
-        System.out.println(valoracion);
         try {
             valoracionRepository.save(valoracion);
             return true;
