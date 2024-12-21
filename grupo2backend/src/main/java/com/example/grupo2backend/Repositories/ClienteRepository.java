@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 //extensión mongoRepository para proporcionar operaciones CRUD para la entidad Cliente
 public interface ClienteRepository extends MongoRepository<Cliente, String> {
+    Cliente findByEmail(String email);
 }
