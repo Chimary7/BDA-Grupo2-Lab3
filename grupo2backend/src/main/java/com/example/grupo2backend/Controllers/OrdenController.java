@@ -18,7 +18,6 @@ public class OrdenController {
 
     @GetMapping("/getByIdUser/{id}")
     public List<Orden> getOrdenesByIdCliente(@PathVariable String id) {
-        System.out.println("id: " + id);
         return ordenService.findById_Cliente(id);
     }
 }

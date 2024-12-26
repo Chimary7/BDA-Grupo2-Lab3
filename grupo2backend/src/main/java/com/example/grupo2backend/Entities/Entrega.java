@@ -8,10 +8,10 @@ public class Entrega {
 
     @Id
     private String id;
-    private String id_zona;
-    private String id_cliente;
+    private String idZona;
+    private String idCliente;
 
-    private GeoJsonPoint coordenada_direccion;
+    private GeoJsonPoint coordenadaDireccion;
 
     private String direccion;
     private String estado;
@@ -20,12 +20,12 @@ public class Entrega {
     public String getId() { return id; }
 
 
-    public String getId_zona() { return id_zona; }
+    public String getIdZona() { return idZona; }
 
 
-    public String getId_cliente() { return id_cliente; }
+    public String getIdCliente() { return idCliente; }
 
-    public GeoJsonPoint getCoordenada_direccion() { return coordenada_direccion; }
+    public GeoJsonPoint getCoordenadaDireccion() { return coordenadaDireccion; }
 
     public String getEstado() { return estado; }
 
@@ -35,13 +35,13 @@ public class Entrega {
 
     public void setId(String id) { this.id = id; }
 
-    public void setId_cliente(String id_cliente) { this.id_cliente = id_cliente; }
+    public void setIdCliente(String idCliente) { this.idCliente = idCliente; }
 
-    public void setId_zona(String id_zona) { this.id_zona = id_zona; }
+    public void setIdZona(String idZona) { this.idZona = idZona; }
 
-    public void setId_entrega(String id_pedido) { this.id = id; }
+    public void setIdEntrega(String id) { this.id = id; }
 
-    public void setCoordenada_direccion(GeoJsonPoint coordenada_direccion) { this.coordenada_direccion = coordenada_direccion; }
+    public void setCoordenadaDireccion(GeoJsonPoint coordenadaDireccion) { this.coordenadaDireccion = coordenadaDireccion; }
 
 
     public void setDireccion(String direccion) { this.direccion = direccion; }

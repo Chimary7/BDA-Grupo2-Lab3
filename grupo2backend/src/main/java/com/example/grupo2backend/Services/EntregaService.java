@@ -17,10 +17,10 @@ public class EntregaService {
     public ResponseEntity<Object> guardar(Entrega entrega) {
         try {
             entregaRepository.save(entrega);
-            return new ResponseEntity<>("Se ingresó correctamente el pedido", HttpStatus.CREATED);
+            return new ResponseEntity<>("Se ingresó correctamente la entrega", HttpStatus.CREATED);
         } catch (Exception e) {
             // Manejo del error
-            return new ResponseEntity<>("Error al ingresar el pedido: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al ingresar la entrega: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -35,9 +35,9 @@ public class EntregaService {
     public ResponseEntity<Object> deletePedido(String id) {
         try {
             entregaRepository.deleteById(id);
-            return new ResponseEntity<>("Se eliminó correctamente el pedido", HttpStatus.OK);
+            return new ResponseEntity<>("Se eliminó correctamente la entrega", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar el pedido: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al eliminar la entrega: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -45,7 +45,7 @@ public class EntregaService {
         try {
             entregaRepository.save(entrega);
         } catch (Exception e) {
-            throw new RuntimeException("Error updating pedido: " + e.getMessage());
+            throw new RuntimeException("Error updating Entrega: " + e.getMessage());
         }
     }
 

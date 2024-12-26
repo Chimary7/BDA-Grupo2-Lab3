@@ -13,9 +13,7 @@ public class OrdenService {
     private OrdenRepository ordenRepository;
 
     public List<Orden> findById_Cliente(String idCliente) {
-        System.out.println("id: " + idCliente);
         List<Orden> ordenes = ordenRepository.findByIdCliente(idCliente);
-        System.out.println("ordenes: " + ordenes);
         return ordenes;
     }
 }

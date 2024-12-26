@@ -8,27 +8,27 @@ import java.util.Date;
 @Document(collection = "orden")
 public class Orden {
     private String id;
-    private Date fecha_orden;
+    private Date fechaOrden;
     private String estado;
 
     private String idCliente;
-    private String id_entrega;
+    private String idEntrega;
     private BigDecimal total;
 
-    public String getId_orden() {
+    public String getIdOrden() {
         return id;
     }
 
-    public void setId_orden(String id) {
+    public void setIdOrden(String id) {
         this.id = id;
     }
 
     public Date getFecha_orden() {
-        return fecha_orden;
+        return fechaOrden;
     }
 
     public void setFechaOrden(Date fechaOrden) {
-        this.fecha_orden = fechaOrden;
+        this.fechaOrden = fechaOrden;
     }
 
     public String getEstado() {
@@ -43,20 +43,20 @@ public class Orden {
         return idCliente;
     }
 
-    public void setId_cliente(String id_cliente) {
-        this.idCliente = id_cliente;
+    public void setId_cliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
     public void setFecha_orden(Date fecha_orden) {
-        this.fecha_orden = fecha_orden;
+        this.fechaOrden = fecha_orden;
     }
 
     public String getId_entrega() {
-        return id_entrega;
+        return idEntrega;
     }
 
     public void setId_entrega(String id_entrega) {
-        this.id_entrega = id_entrega;
+        this.idEntrega = id_entrega;
     }
 
     public BigDecimal getTotal() {
