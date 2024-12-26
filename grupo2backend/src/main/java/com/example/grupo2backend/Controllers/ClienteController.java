@@ -14,7 +14,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping("/")
-    public void saveCliente(@RequestBody  Cliente cliente) {
+    public void saveCliente(@RequestBody Cliente cliente) {
         clienteService.saveCliente(cliente);
     }
 
