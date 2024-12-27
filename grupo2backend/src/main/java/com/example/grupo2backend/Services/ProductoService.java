@@ -1,16 +1,21 @@
 package com.example.grupo2backend.Services;
 
+import com.example.grupo2backend.Entities.DetalleOrden;
 import com.example.grupo2backend.Entities.Producto;
 import com.example.grupo2backend.Repositories.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private DetalleOrdenService detalleOrdenService;
 
     public Boolean saveProducto(Producto producto) {
         try {
@@ -45,5 +50,15 @@ public class ProductoService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public List<Producto> findProductoByDetalleOrden(String id) {
+        List<DetalleOrden> detalles = detalleOrdenService.findDetalleOrdenByIdOrden(id);
+        List<Producto> productos = new ArrayList<>();
+        for (DetalleOrden detalle : detalles) {
+            Producto producto = findProductoById(detalle.getIdProducto());
+            productos.add(producto);
+        }
+        return productos;
     }
 }
