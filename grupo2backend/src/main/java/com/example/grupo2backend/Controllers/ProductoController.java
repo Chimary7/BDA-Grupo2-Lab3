@@ -36,4 +36,9 @@ public class ProductoController {
     public Boolean deleteProductoById(@PathVariable String id) {
         return productoService.deleteProductoById(id);
     }
+
+    @GetMapping("/byDetalleOrden/{id}")
+    public List<Producto> getProductoByDetalleOrden(@PathVariable String id) {
+        return productoService.findProductoByDetalleOrden(id);
+    }
 }
