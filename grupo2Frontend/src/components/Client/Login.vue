@@ -3,7 +3,9 @@ import LoginImage from '../../assets/login image.png'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '../../services/UserService.js';
+import { useStore } from 'vuex';
 
+const store = useStore();
 const router = useRouter();
 const email = ref('');
 const error = ref('');
@@ -23,6 +25,8 @@ const Login = async () => {
     }
     const response = await login(data);
     if(response.status === 200){
+      store.commit('setUser', response.data);
+      store.commit('login');
       success.value = true
       console.log("inicia sesion correctamente")
     }
