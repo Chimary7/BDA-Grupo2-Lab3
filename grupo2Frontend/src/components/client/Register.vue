@@ -52,26 +52,27 @@ const register = async () => {
 </script>
 
 <template>
-  <div class="flex h-screen">
+  <div class="flex h-screen bg-color-secondary">
     <div class="flex-1 flex items-center justify-center">
-      <img src="/images/imagen_register.png" alt="Imagen estática" class="max-w-full h-auto" />
+      <div class="absolute w-48r h-48r bg-white rounded-full"></div>
+      <img src="/images/imagen_register.png" alt="Imagen estática" class="max-w-full h-auto relative object-cover" />
     </div>
-    <div class="flex-1 flex items-center justify-end ml-10">
-      <form @submit.prevent="register" class="w-[650px] p-10 bg-white box-border flex flex-col items-center justify-center rounded-xl border-2 border-red-600">
-        <h2 class="text-3xl font-bold text-center mb-10 text-red-600">Crear una cuenta</h2>
-        <div class="grid gap-4 mb-6 md:grid-cols-2">
-          <input type="text" v-model="firstName" placeholder="Nombre" class="bg-white border border-red-600 rounded-md h-12 text-black p-2"/>
-          <input type="text" v-model="lastName" placeholder="Apellido" class="bg-white border border-red-600 rounded-md h-12 text-black p-2"/>
+    <div class="flex-1 flex items-center justify-center ml-10">
+      <form @submit.prevent="register" class="w-4/5 h-5/6 p-10 bg-white box-border flex flex-col items-center justify-center rounded-xl border-2 border-color-quaternary">
+        <h2 class="text-6xl font-bold text-center mb-10 text-color-quinary">Crear una cuenta</h2>
+        <div class="grid gap-4 mb-6 md:grid-cols-2 w-full">
+          <input type="text" v-model="firstName" placeholder="Nombre" class="bg-white border-2 border-color-quaternary rounded-md h-12 text-black p-4"/>
+          <input type="text" v-model="lastName" placeholder="Apellido" class="bg-white border-2 border-color-quaternary rounded-md h-12 text-black p-4"/>
         </div>
-        <input type="text" v-model="email" placeholder="Correo electrónico" class="bg-white border border-red-600 rounded-md h-12 w-[490px] mb-6 text-black p-2"/>
-        <input type="text" v-model="direccion" placeholder="Dirección" class="bg-white border border-red-600 rounded-md h-12 w-[490px] mb-6 text-black p-2"/>
-        <input type="text" v-model="telefono" placeholder="Telefono" class="bg-white border border-red-600 rounded-md h-12 w-[490px] mb-6 text-black p-2"/>
-        <div class="grid gap-4 mb-6 md:grid-cols-2">
-          <input type="password" v-model="password" placeholder="Contraseña" class="bg-white border border-red-600 rounded-md h-12 text-black p-2"/>
-          <input type="password" v-model="password2" placeholder="Repetir contraseña" class="bg-white border border-red-600 rounded-md h-12 text-black p-2"/>
+        <input type="text" v-model="email" placeholder="Correo electrónico" class="bg-white border-2 border-color-quaternary rounded-md h-12 w-full mb-6 text-black p-4"/>
+        <input type="text" v-model="direccion" placeholder="Dirección" class="bg-white border-2 border-color-quaternary rounded-md h-12 w-full mb-6 text-black p-4"/>
+        <input type="text" v-model="telefono" placeholder="Telefono" class="bg-white border-2 border-color-quaternary rounded-md h-12 w-full mb-6 text-black p-4"/>
+        <div class="grid gap-4 mb-6 md:grid-cols-2 w-full">
+          <input type="password" v-model="password" placeholder="Contraseña" class="bg-white border-2 border-color-quaternary rounded-md h-12 text-black p-4"/>
+          <input type="password" v-model="password2" placeholder="Repetir contraseña" class="bg-white border-2 border-color-quaternary rounded-md h-12 text-black p-4"/>
         </div>
-        <p class="text-red-600 text-sm text-center mb-6">¿Ya tienes una cuenta? <router-link :to="{name: 'login'}" class="underline">Inicia sesión aquí</router-link></p>
-        <button type="submit" class="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700">Registrar</button>
+        <p class="text-color-quinary font-medium text-center mb-6">¿Ya tienes una cuenta? <router-link :to="{name: 'Login'}" class="text-color-quinary font-semibold px-2 hover:font-bold hover:text-color-quinary">Inicia sesión</router-link></p>
+        <button type="submit" class="mt-1 p-4 w-full bg-color-quinary text-white rounded-lg shadow-lg text-lg font-semibold border-2 border-color-quinary hover:bg-color-primary hover:text-color-quinary hover:border-color-quinary">Registrar</button>
       </form>
     </div>
   </div>
