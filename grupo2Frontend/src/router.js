@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Register from './components/client/Register.vue'
-import HelloWorld from "./components/HelloWorld.vue";
-
+import Home from './components/client/HomeClient.vue';
+import Register from './components/client/Register.vue';
+import Login from './components/client/Login.vue';
 const routes= [
     {
         path: '/',
-        name: 'home',
-        component: HelloWorld
+        name: 'Home',
+        component: Home
     },
     {
         path: '/login',
-        name: 'login',
-        component: HelloWorld //Reemplazar con la componente que corresponda
+        name: 'Login',
+        component: Login
     },
     {
         path: '/register',
