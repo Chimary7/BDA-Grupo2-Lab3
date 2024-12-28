@@ -9,6 +9,11 @@ const routes= [
         component: HelloWorld
     },
     {
+        path: '/login',
+        name: 'login',
+        component: HelloWorld //Reemplazar con la componente que corresponda
+    },
+    {
         path: '/register',
         name: 'register',
         component: Register
