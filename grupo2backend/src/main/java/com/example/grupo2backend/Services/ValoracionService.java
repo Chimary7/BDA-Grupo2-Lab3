@@ -33,6 +33,10 @@ public class ValoracionService {
         return valoracionRepository.findByIdProducto(idProducto);
     }
 
+    public List<Valoracion> findValoracionByIdCliente(String idCliente) {
+        return valoracionRepository.findByIdCliente(idCliente);
+    }
+
     public Boolean updateValoracion(Valoracion valoracion){
         try {
             valoracionRepository.save(valoracion);

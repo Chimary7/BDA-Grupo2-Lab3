@@ -28,6 +28,10 @@ public class ValoracionController {
     public List<Valoracion> getValoracionByIdProducto(@PathVariable String idProducto) {
         return valoracionService.findValoracionByIdProducto(idProducto);
     }
+    @GetMapping("/cliente/{idCliente}")
+    public List<Valoracion> getValoracionByIdCliente(@PathVariable String idCliente) {
+        return valoracionService.findValoracionByIdCliente(idCliente);
+    }
     @PutMapping("/")
     public Boolean updateValoracion(@RequestBody Valoracion valoracion) {
         return valoracionService.updateValoracion(valoracion);
