@@ -13,6 +13,10 @@ public class ValoracionService {
     private ValoracionRepository valoracionRepository;
 
     public Boolean saveValoracion(Valoracion valoracion) {
+        if(valoracion.getValoracion() < 1.0 || valoracion.getValoracion() > 5.0){
+            throw new RuntimeException("Error, la valoración debe estar entre 1.0 y 5.0");
+        }
+
         try {
             valoracionRepository.save(valoracion);
             return true;
@@ -31,6 +35,10 @@ public class ValoracionService {
 
     public List<Valoracion> findValoracionByIdProducto(String idProducto) {
         return valoracionRepository.findByIdProducto(idProducto);
+    }
+
+    public List<Valoracion> findValoracionByIdCliente(String idCliente) {
+        return valoracionRepository.findByIdCliente(idCliente);
     }
 
     public Boolean updateValoracion(Valoracion valoracion){
