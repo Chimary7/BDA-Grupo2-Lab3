@@ -1,6 +1,5 @@
 <script setup>;
 import { defineProps } from 'vue';
-import Check from '../../../assets/check-animado.gif'
 
 defineProps({
     message: String
