@@ -58,4 +58,21 @@ public class ValoracionService {
             return false;
         }
     }
+
+    public Double valoracionPromedioProducto(String idProducto){
+        List<Valoracion> valoraciones = findValoracionByIdProducto(idProducto);
+        Double sumaValoraciones = 0.0;
+
+        if(valoraciones.isEmpty()){
+            return sumaValoraciones;
+        }
+
+        for(Valoracion valoracion : valoraciones){
+            sumaValoraciones += valoracion.getValoracion();
+        }
+
+        Double promedio = sumaValoraciones / valoraciones.size();
+
+        return Math.round(promedio * 10) / 10.0;
+    }
 }
