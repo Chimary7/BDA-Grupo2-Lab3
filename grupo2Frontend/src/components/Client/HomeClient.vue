@@ -2,8 +2,10 @@
 import Navbar from './Navbar.vue'
 </script>
 <template>
-    <Navbar />
-    <div class="w-full h-screen bg-white text-black flex items-center justify-center">
-        <router-view />
+    <div class="h-full w-full bg-white flex flex-col">
+        <Navbar />
+        <div class="w-full h-full bg-transparent text-black flex items-center justify-center overflow-hidden box-border">
+            <router-view />
+        </div>
     </div>
 </template>
