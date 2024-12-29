@@ -3,17 +3,23 @@ import Home from './components/client/HomeClient.vue';
 import Register from './components/client/Register.vue';
 import Login from './components/client/Login.vue';
 import Navbar from './components/client/Navbar.vue';
+import AllProducts from './components/client/AllProductsClient.vue';
 
 const routes= [
     {
-        path: '/',
-        name: 'Home',
-        component: Home
+        path: '/', redirect: { name: 'Home'}
     },
     {
-        path: '/home/allproducts',
-        name: 'AllProducts',
-        component: Navbar
+        path: '/home',
+        name: 'Home',
+        component: Home,
+        children: [
+            {
+                path: 'allproducts',
+                name: 'AllProducts',
+                component: AllProducts
+            }
+        ]
     },
     {
         path: '/login',
