@@ -58,4 +58,21 @@ public class ValoracionService {
             return false;
         }
     }
+
+    public Double valoracionPromedioProducto(String idProducto) {
+        List<Valoracion> valoraciones = findValoracionByIdProducto(idProducto);
+
+        if (valoraciones.isEmpty()) {
+            return 0.0;
+        }
+
+
+        Double promedio = valoraciones.stream()
+                .mapToDouble(Valoracion::getValoracion)
+                .average()
+                .orElse(0.0);
+
+        return Math.round(promedio * 10) / 10.0;
+    }
+
 }

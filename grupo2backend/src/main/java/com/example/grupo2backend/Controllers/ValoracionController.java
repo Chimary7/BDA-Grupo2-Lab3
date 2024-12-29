@@ -52,4 +52,9 @@ public class ValoracionController {
     public Boolean deleteValoracionById(@PathVariable String id) {
         return valoracionService.deleteValoracionById(id);
     }
+
+    @GetMapping("/valoracionProducto/{idProducto}")
+    public Double getPromedioValoracionProducto(@PathVariable String idProducto) {
+        return valoracionService.valoracionPromedioProducto(idProducto);
+    }
 }
