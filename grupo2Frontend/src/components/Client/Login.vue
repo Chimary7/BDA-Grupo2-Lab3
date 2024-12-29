@@ -4,13 +4,15 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '../../services/UserService.js';
 import { useStore } from 'vuex';
+import Alert from '../client/alert/MessageSucces.vue';
 
 const store = useStore();
 const router = useRouter();
 const email = ref('');
-const error = ref('');
+const error = ref(false);
 const password = ref('');
-const success = ref('');
+const success = ref(false);
+const alertMessage = ref('');
 const Login = async () => {
     error.value = false
     success.value = false
@@ -28,6 +30,10 @@ const Login = async () => {
       store.commit('setUser', response.data);
       store.commit('login');
       success.value = true
+      alertMessage.value = 'se inicio sesión correctamente';
+      setTimeout(() => {
+        router.push({ name: 'Home' });
+      }, 2000);
       console.log("inicia sesion correctamente")
     }
     else{
@@ -43,12 +49,12 @@ const Login = async () => {
 
 <template>
     <div class="h-full w-full bg-white flex items-center justify-between">
+      <Alert :message="alertMessage" v-if="success" />
         <div class="text-black bg-transparent w-1/2 h-full flex items-center justify-center">
             <div class="bg-color-secondary w-4/5 h-5/6 rounded-lg flex flex-col items-center justify-center border-2 border-color-quaternary">
                 <form @submit.prevent="Login" class="w-full h-full flex flex-col items-center justify-center">
                     <h1 class="text-7xl text-color-quinary font-bold p-8 w-full h-1/6 text-center flex items-center justify-center">Login</h1>
                     <div v-if="error" class="w-5/6 bg-red-200 text-red-800 p-4 rounded-lg mb-6 border-2 border-red-400">Email o contraseña incorrectos</div>
-                    <div v-if="success" class="w-5/6 bg-green-200 text-green-800 p-4 rounded-lg mb-6 border-2 border-green-400">inicio sesion correctamente</div>
                     <div class="w-5/6 mb-6">
                         <label for="email" class="block text-xl font-medium text-color-quinary mb-1 pl-1 flex">Email</label>
                         <input type="email" v-model="email" id="email" class="mt-2 p-4 w-full border-2 border-color-quinary rounded-lg shadow-sm text-lg bg-white text-black 
