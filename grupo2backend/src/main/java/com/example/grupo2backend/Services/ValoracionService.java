@@ -59,20 +59,20 @@ public class ValoracionService {
         }
     }
 
-    public Double valoracionPromedioProducto(String idProducto){
+    public Double valoracionPromedioProducto(String idProducto) {
         List<Valoracion> valoraciones = findValoracionByIdProducto(idProducto);
-        Double sumaValoraciones = 0.0;
 
-        if(valoraciones.isEmpty()){
-            return sumaValoraciones;
+        if (valoraciones.isEmpty()) {
+            return 0.0;
         }
 
-        for(Valoracion valoracion : valoraciones){
-            sumaValoraciones += valoracion.getValoracion();
-        }
 
-        Double promedio = sumaValoraciones / valoraciones.size();
+        Double promedio = valoraciones.stream()
+                .mapToDouble(Valoracion::getValoracion)
+                .average()
+                .orElse(0.0);
 
         return Math.round(promedio * 10) / 10.0;
     }
+
 }
