@@ -6,6 +6,7 @@ import AllProducts from './components/client/AllProductsClient.vue';
 import Admin from './components/Admin/HomeAdmin.vue';
 import CrearProducto from './components/Admin/CrearProducto.vue';
 import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
+
 const routes= [
     {
         path: '/', redirect: { name: 'Home'}
