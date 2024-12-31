@@ -6,6 +6,7 @@ import AllProducts from './components/client/AllProductsClient.vue';
 import Admin from './components/Admin/HomeAdmin.vue';
 import CrearProducto from './components/Admin/CrearProducto.vue';
 import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
+import DetalleEntrega from './components/Admin/DetalleEntrega.vue';
 
 const routes= [
     {
@@ -47,6 +48,11 @@ const routes= [
                 path: '/OrdenPorCliente',
                 name: 'OrdenPorCliente',
                 component: OrdenPorCliente
+            },
+            {
+                path: '/entrega/:id',
+                name: 'DetalleEntrega',
+                component: DetalleEntrega
             }
         ]
     }
