@@ -2,10 +2,11 @@
 
 import {useRouter} from "vue-router";
 import {onMounted, ref, watch} from "vue";
-import {createProduct, editProduct, getProductByID} from "../../services/productService.js";
+import {editProduct, getProductByID} from "../../services/productService.js";
 import {getAllCategories} from "../../services/categoryService.js";
 
 const router = useRouter();
+const idProducto = router.currentRoute.value.params.id;
 const nombre = ref('')
 const precio = ref('')
 const stock = ref('')
@@ -16,12 +17,25 @@ const selectedCategoria = ref(null);
 
 onMounted(async () => {
   const response1 = await getAllCategories();
+  console.log(response1.data);
   categorias.value = response1.data;
+
+  const response = await getProductByID(idProducto);
+  console.log(response.data);
+  nombre.value = response.data.nombre;
+  precio.value = response.data.precio;
+  stock.value = response.data.stock;
+  selectedCategoria.value = response.data.idCategoria;
+  descripcion.value = response.data.descripcion;
+  estado.value = response.data.estado;
 });
 
+watch(selectedCategoria, (newValue) => {
+  console.log('selectedCategoria:', newValue);
+});
 
 const editarProducto = async() => {
-  if (nombre.value === '' || precio.value === '' || stock.value === '' || descripcion.value === '' || categoria.value === '' || estado.value === '') {
+  if (nombre.value === '' || precio.value === '' || stock.value === '' || descripcion.value === '' || estado.value === '') {
     alert('Todos los campos son obligatorios');
     return;
   }
@@ -31,24 +45,25 @@ const editarProducto = async() => {
     return;
   }
 
-  const data = {
+  const productData = {
+    id: String(idProducto),
+    idCategoria: String(selectedCategoria.value),
     nombre: nombre.value,
     descripcion: descripcion.value,
-    precio: precio.value,
-    stock: stock.value,
-    estado: estado.value,
-    idCategoria: selectedCategoria.value
-  }
+    precio: Number(precio.value),
+    stock: Number(stock.value),
+    estado: estado.value
+  };
 
-  console.log("Creando producto...");
-  console.log(data);
-  const response = await createProduct(data);
-  console.log(response);
-  if (response) {
-    alert('Producto creado correctamente');
-    await router.push({name: 'allProducts'});
-  } else {
-    alert('Error al crear el producto');
+  try {
+    const response = await editProduct(productData);
+    if (response) {
+      alert('Los cambios se han aplicado exitosamente');
+      await router.push({name: 'allProducts'});
+    }
+  } catch (error) {
+    alert('Error al enviar los cambios');
+    console.error(error);
   }
 }
 
@@ -56,12 +71,13 @@ const volver = () => {
   router.push({ name: 'allProducts'});
 };
 
+
 </script>
 
 <template>
   <div class="flex justify-center items-center min-h-screen bg-white p-4">
     <div class="bg-white p-8 rounded-lg border border-[#71b770] shadow-lg w-full max-w-2xl">
-      <h1 class="text-center text-3xl font-bold text-[#71b770] mb-6">Crear Producto</h1>
+      <h1 class="text-center text-3xl font-bold text-[#71b770] mb-6">Editar Producto</h1>
       <form @submit.prevent="editarProducto">
         <div class="mb-4">
           <label for="nombre" class="block text-[#71b770] font-bold mb-2">Nombre:</label>
