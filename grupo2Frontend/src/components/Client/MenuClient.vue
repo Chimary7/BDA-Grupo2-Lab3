@@ -2,13 +2,14 @@
 import { ref } from 'vue';
 import { getAllCategories } from '../../services/categoryService';
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import SearchIcon from '../../assets/search-icon.png';
 
 const searchQuery = ref('');
 const categories = ref([]);
+const router = useRouter();
 
-const emitSearchQuery = defineEmits(['searchQuery-Product']); // se emite evento de busqueda de productos
-
+const emit = defineEmits(['searchQuery-Product']);
 const handleSearch = () => {
     emit('searchQuery-Product', searchQuery.value);
 }
@@ -16,12 +17,19 @@ const handleSearch = () => {
 const getCategories = async () => {
     const response = await getAllCategories();
     categories.value = response.data;
-    console.log(categories.value);
 }
 
 onMounted(() => {
     getCategories();
 })
+
+const navigateToCategory = (category) => {
+    router.push({
+        name: 'Category',
+        params: { categoryName: category.nombre },
+        query: { id: category.id }
+});
+}
 
 </script>
 
@@ -46,7 +54,9 @@ onMounted(() => {
             <h2 class="text-xl font-bold py-4 text-color-quinary">Categorias</h2>
 
             <li v-for="category in categories" :key="category.id" class="w-full p-2">
-                <button class="h-12 w-full flex items-center justify-center bg-color-quaternary text-white font-semibold border-2 border-color-quaternary rounded-3xl hover:bg-white hover:border-color-quinary hover:text-color-quinary">
+                <button class="h-12 w-full flex items-center justify-center bg-color-quaternary text-white font-semibold border-2 border-color-quaternary rounded-3xl hover:bg-white hover:border-color-quinary hover:text-color-quinary"
+                    @click="navigateToCategory(category)"
+                >
                     {{ category.nombre }}
                 </button>
             </li>

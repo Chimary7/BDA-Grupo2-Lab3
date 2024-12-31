@@ -4,6 +4,7 @@ import Register from './components/client/Register.vue';
 import Login from './components/client/Login.vue';
 import Products from './components/client/ProductContainer.vue';
 import AllProducts from './components/client/AllProductsClient.vue';
+import ProductsCategory from './components/client/ProductsCategory.vue';
 import Admin from './components/Admin/HomeAdmin.vue';
 import CrearProducto from './components/Admin/CrearProducto.vue';
 import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
@@ -25,6 +26,12 @@ const routes= [
                         path: 'all',
                         name: 'All',
                         component: AllProducts
+                    },
+                    {
+                        path: 'category/:categoryName',
+                        name: 'Category',
+                        component: ProductsCategory,
+                        props: true
                     }
                 ]
             }
