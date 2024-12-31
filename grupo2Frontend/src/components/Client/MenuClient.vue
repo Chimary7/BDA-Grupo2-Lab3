@@ -31,6 +31,12 @@ const navigateToCategory = (category) => {
 });
 }
 
+const navigateAll = () => {
+    router.push({
+        name: 'All'
+    });
+}
+
 </script>
 
 <template>
@@ -52,6 +58,15 @@ const navigateToCategory = (category) => {
         <hr class="w-11/12 border border-color-secondary" />
         <ul class="h-5/6 w-full">
             <h2 class="text-xl font-bold py-4 text-color-quinary">Categorias</h2>
+
+            <li class="w-full p-2">
+                <button class="h-12 w-full flex items-center justify-center bg-color-quaternary text-white font-semibold border-2 border-color-quaternary rounded-3xl hover:bg-white hover:border-color-quinary hover:text-color-quinary"
+                    @click="navigateAll"
+                >
+                    Todos
+                </button>
+
+            </li>
 
             <li v-for="category in categories" :key="category.id" class="w-full p-2">
                 <button class="h-12 w-full flex items-center justify-center bg-color-quaternary text-white font-semibold border-2 border-color-quaternary rounded-3xl hover:bg-white hover:border-color-quinary hover:text-color-quinary"
