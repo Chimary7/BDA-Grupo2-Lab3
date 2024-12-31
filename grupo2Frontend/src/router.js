@@ -8,6 +8,7 @@ import ProductsCategory from './components/client/ProductsCategory.vue';
 import Admin from './components/Admin/HomeAdmin.vue';
 import CrearProducto from './components/Admin/CrearProducto.vue';
 import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
+import EditarProducto from "./components/Admin/EditarProducto.vue";
 const routes= [
     {
         path: '/', redirect: { name: 'Home'}
@@ -56,6 +57,11 @@ const routes= [
                 path: '/CrearProducto',
                 name: 'CrearProducto',
                 component: CrearProducto
+            },
+            {
+                path: '/EditarProducto/:id',
+                name: 'EditarProducto',
+                component: EditarProducto
             },
             {
                 path: '/OrdenPorCliente',
