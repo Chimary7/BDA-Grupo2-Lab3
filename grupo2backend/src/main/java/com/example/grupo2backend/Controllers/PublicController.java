@@ -55,4 +55,9 @@ public class PublicController {
     public Boolean deleteProductoById(@PathVariable String id) {
         return productoService.deleteProductoById(id);
     }
+
+    @PostMapping("/productos")
+    public Boolean createProducto(@RequestBody Producto producto) {
+        return productoService.saveProducto(producto);
+    }
 }

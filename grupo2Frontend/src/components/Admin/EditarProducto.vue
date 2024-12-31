@@ -25,7 +25,7 @@ onMounted(async () => {
   nombre.value = response.data.nombre;
   precio.value = response.data.precio;
   stock.value = response.data.stock;
-  selectedCategoria.value = response.data.iidCategoria;
+  selectedCategoria.value = response.data.idCategoria;
   descripcion.value = response.data.descripcion;
   estado.value = response.data.estado;
 });
@@ -59,6 +59,7 @@ const editarProducto = async() => {
     const response = await editProduct(productData);
     if (response) {
       alert('Los cambios se han aplicado exitosamente');
+      await router.push({name: 'allProducts'});
     }
   } catch (error) {
     alert('Error al enviar los cambios');
