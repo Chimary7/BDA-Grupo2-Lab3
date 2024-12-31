@@ -36,7 +36,7 @@ public class Producto {
         return idCategoria;
     }
 
-    public void setidCategoria(String idCategoria) {
+    public void setIdCategoria(String idCategoria) {
         this.idCategoria = idCategoria;
     }
 
