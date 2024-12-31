@@ -24,9 +24,6 @@ public class Producto {
         this.estado = estado;
     }
 
-    public Producto() {
-    }
-
     public String getId() {
         return id;
    }
@@ -35,7 +32,7 @@ public class Producto {
         this.id = id;
     }
 
-    public String getIidCategoria() {
+    public String getIdCategoria() {
         return idCategoria;
     }
 
