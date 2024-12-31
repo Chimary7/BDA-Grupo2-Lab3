@@ -24,9 +24,6 @@ public class Producto {
         this.estado = estado;
     }
 
-    public Producto() {
-    }
-
     public String getId() {
         return id;
    }

@@ -10,6 +10,8 @@ import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
 import EditarProducto from "./components/Admin/EditarProducto.vue";
 import HomeAdmin from "./components/Admin/HomeAdmin.vue";
 import AllProductsAdmin from "./components/Admin/AllProductsAdmin.vue";
+import DetalleEntrega from './components/Admin/DetalleEntrega.vue';
+
 const routes= [
     {
         path: '/', redirect: { name: 'Home'}
@@ -73,6 +75,11 @@ const routes= [
                 path: 'OrdenPorCliente',
                 name: 'OrdenPorCliente',
                 component: OrdenPorCliente
+            },
+            {
+                path: '/entrega/:id',
+                name: 'DetalleEntrega',
+                component: DetalleEntrega
             }
         ]
     }
