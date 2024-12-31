@@ -59,14 +59,33 @@ export const getProductByID = async (id) => {
 
 export const editProduct = async (product) => {
     try {
-        const response = await httpClient.put("/producto/", product);
-        console.log(response.data)
+        const formattedProduct = {
+            id: String(product.id),
+            idCategoria: String(product.idCategoria),
+            nombre: product.nombre,
+            descripcion: product.descripcion,
+            precio: Number(product.precio),
+            stock: Number(product.stock),
+            estado: product.estado
+        };
+
+        console.log('Datos a enviar:', formattedProduct);
+        
+        const response = await httpClient.put("/producto/", formattedProduct, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        console.log('Respuesta:', response.data);
         return response.data;
     } catch (error) {
-        console.error("Error en la respuesta del servidor:", error.response.data);
+        console.error("Error completo:", error);
+        console.error("Error en la respuesta del servidor:", error.response?.data);
         throw error;
     }
 }
+
 
 export const deleteProductByID = async (id) =>{
     try{

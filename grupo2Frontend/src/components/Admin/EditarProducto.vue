@@ -35,39 +35,34 @@ watch(selectedCategoria, (newValue) => {
 });
 
 const editarProducto = async() => {
-  if (nombre.value === '' || precio.value === '' || stock.value === '' || descripcion.value === '' || categoria.value === '' || estado.value === '') {
+  if (nombre.value === '' || precio.value === '' || stock.value === '' || descripcion.value === '' || estado.value === '') {
     alert('Todos los campos son obligatorios');
     return;
   }
-
-
 
   if (!selectedCategoria.value){
     alert('Seleccione una categoría');
     return;
   }
 
-  console.log('Enviando los cambios hechos al producto');
-  console.log("Id del objeto", idProducto)
-  console.log("De tipo: ", typeof idProducto)
-  const data = {
-    id: idProducto,
-    idCategoria: selectedCategoria.value,
+  const productData = {
+    id: String(idProducto),
+    idCategoria: String(selectedCategoria.value),
     nombre: nombre.value,
     descripcion: descripcion.value,
-    precio: precio.value,
-    stock: stock.value,
+    precio: Number(precio.value),
+    stock: Number(stock.value),
     estado: estado.value
-  }
+  };
 
-  console.log(data);
-  const response = await editProduct(idProducto, data);
-  console.log(response);
-  if (response) {
-    alert('Los cambios se han aplicado exitosamente');
-    router.push({ name: 'mostrarProductos', params: { id: 1 }});
-  } else {
+  try {
+    const response = await editProduct(productData);
+    if (response) {
+      alert('Los cambios se han aplicado exitosamente');
+    }
+  } catch (error) {
     alert('Error al enviar los cambios');
+    console.error(error);
   }
 }
 
