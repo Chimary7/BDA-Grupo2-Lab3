@@ -5,6 +5,8 @@ import Login from './components/client/Login.vue';
 import Products from './components/client/ProductContainer.vue';
 import AllProducts from './components/client/AllProductsClient.vue';
 import ProductsCategory from './components/client/ProductsCategory.vue';
+import OrderList from './components/client/OrderList.vue';
+import DetallesOrden from './components/client/OrdenDetaill.vue';
 import CrearProducto from './components/Admin/CrearProducto.vue';
 import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
 import EditarProducto from "./components/Admin/EditarProducto.vue";
@@ -38,6 +40,16 @@ const routes= [
                         props: true
                     }
                 ]
+            },
+            {
+                path: 'historial',
+                name: 'OrderList',
+                component: OrderList
+            },
+            {
+                path: 'detalles/:id',
+                name: 'DetailsOrder',
+                component: DetallesOrden,
             }
         ]
     },
