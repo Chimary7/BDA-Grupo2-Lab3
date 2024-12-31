@@ -5,10 +5,11 @@ import Login from './components/client/Login.vue';
 import Products from './components/client/ProductContainer.vue';
 import AllProducts from './components/client/AllProductsClient.vue';
 import ProductsCategory from './components/client/ProductsCategory.vue';
-import Admin from './components/Admin/HomeAdmin.vue';
 import CrearProducto from './components/Admin/CrearProducto.vue';
 import OrdenPorCliente from './components/Admin/OrdenPorCliente.vue';
 import EditarProducto from "./components/Admin/EditarProducto.vue";
+import HomeAdmin from "./components/Admin/HomeAdmin.vue";
+import AllProductsAdmin from "./components/Admin/AllProductsAdmin.vue";
 const routes= [
     {
         path: '/', redirect: { name: 'Home'}
@@ -51,20 +52,25 @@ const routes= [
     {
         path: '/HomeAdmin',
         name: 'HomeAdmin',
-        component: Admin,
+        component: HomeAdmin,
         children: [
             {
-                path: '/CrearProducto',
+                path: 'allProducts',
+                name: 'allProducts',
+                component: AllProductsAdmin
+            },
+            {
+                path: 'CrearProducto',
                 name: 'CrearProducto',
                 component: CrearProducto
             },
             {
-                path: '/EditarProducto/:id',
+                path: 'EditarProducto/:id',
                 name: 'EditarProducto',
                 component: EditarProducto
             },
             {
-                path: '/OrdenPorCliente',
+                path: 'OrdenPorCliente',
                 name: 'OrdenPorCliente',
                 component: OrdenPorCliente
             }

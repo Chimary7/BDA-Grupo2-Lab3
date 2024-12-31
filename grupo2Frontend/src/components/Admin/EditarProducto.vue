@@ -1,10 +1,9 @@
 <script setup>
 
-
 import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
-import {getAllCategories, getCategoryByID} from "../../services/categoryService.js";
 import {editProduct, getProductByID} from "../../services/productService.js";
+import {getAllCategories} from "../../services/categoryService.js";
 
 const router = useRouter();
 const idProducto = router.currentRoute.value.params.id;
@@ -13,11 +12,13 @@ const precio = ref('')
 const stock = ref('')
 const descripcion = ref('')
 const estado = ref('')
-const categoria = ref('')
+const categorias = ref([])
 const selectedCategoria = ref(null);
 
 onMounted(async () => {
-  //const response1 = await getCategoryByID();
+  const response1 = await getAllCategories();
+  categorias.value = response1.data;
+
   const response = await getProductByID(idProducto);
   nombre.value = response.data.nombre;
   precio.value = response.data.precio;
@@ -54,12 +55,16 @@ const editarProducto = async() => {
   }
 }
 
+const volver = () => {
+  router.push({ name: 'allProducts'});
+};
+
 
 </script>
 
 <template>
-  <div class="flex justify-center items-center min-h-screen bg-green-700 p-4">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+  <div class="flex justify-center items-center min-h-screen bg-white p-4">
+    <div class="bg-white p-8 rounded-lg border border-[#71b770] shadow-lg w-full max-w-2xl">
       <h1 class="text-center text-3xl font-bold text-[#71b770] mb-6">Editar Producto</h1>
       <form @submit.prevent="editarProducto">
         <div class="mb-4">
@@ -89,9 +94,9 @@ const editarProducto = async() => {
           </div>
           <div class="flex-grow">
             <label for="categoria" class="block text-[#71b770] font-bold mb-2">Categoría:</label>
-            <select v-model="selectedCategoria" id="categoria" class="w-full p-2 border border-gray-300 rounded bg-white">
+            <select v-model="selectedCategoria" id="categoria" class="text-black w-full p-2 border border-gray-300 rounded bg-white">
               <option disabled value="">Seleccionar categoría</option>
-              <option v-for="cat in categoria" :key="cat.id_categoria" :value="cat.id_categoria">{{ cat.nombre }}</option>
+              <option v-for="cat in categorias" :key="cat.id_categoria" :value="cat.id_categoria">{{ cat.nombre }}</option>
             </select>
           </div>
         </div>

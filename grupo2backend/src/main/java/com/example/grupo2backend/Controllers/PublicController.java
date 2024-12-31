@@ -3,12 +3,10 @@ package com.example.grupo2backend.Controllers;
 import com.example.grupo2backend.Entities.Categoria;
 import com.example.grupo2backend.Entities.Producto;
 import com.example.grupo2backend.Repositories.CategoriaRepository;
+import com.example.grupo2backend.Services.CategoriaService;
 import com.example.grupo2backend.Services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +18,8 @@ public class PublicController {
 
     @Autowired
     private ProductoService productoService;
+    @Autowired
+    private CategoriaService categoriaService;
 
     @GetMapping("/categorias")
     public List<Categoria> getAllCategorias() {
@@ -36,4 +36,23 @@ public class PublicController {
         return productoService.findProductoByIdCategoria(idCategoria);
     }
 
+    @GetMapping("/productos/{id}")
+    public Producto getProductoById(@PathVariable String id) {
+        return productoService.findProductoById(id);
+    }
+
+    @GetMapping("/categorias/{id}")
+    public Categoria getCategoriaById(@PathVariable String id) {
+        return categoriaService.findCategoriaById(id);
+    }
+
+    @PutMapping("/productos")
+    public Boolean updateProducto(@RequestBody Producto producto) {
+        return productoService.updateProducto(producto);
+    }
+
+    @DeleteMapping("/productos/{id}")
+    public Boolean deleteProductoById(@PathVariable String id) {
+        return productoService.deleteProductoById(id);
+    }
 }

@@ -57,11 +57,22 @@ export const getProductByID = async (id) => {
     }
 }
 
-export const editProduct = async (id, product) => {
+export const editProduct = async (product) => {
     try {
-        const response = await httpClient.put(`/productos/${id}`, product);
+        const response = await httpClient.put("/public/productos", product);
         return response.data;
     } catch (error) {
+        console.error("Error en la respuesta del servidor:", error.response.data);
+        throw error;
+    }
+}
+
+export const deleteProductByID = async (id) =>{
+    try{
+        const response = await httpClient.delete(`/public/productos/${id}`);
+        return response.data;
+    }
+    catch (error) {
         console.error("Error en la respuesta del servidor:", error.response.data);
         throw error;
     }
