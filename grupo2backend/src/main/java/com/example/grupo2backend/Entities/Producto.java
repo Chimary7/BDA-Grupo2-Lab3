@@ -35,11 +35,11 @@ public class Producto {
         this.id = id;
     }
 
-    public String getIidCategoria() {
+    public String getIdCategoria() {
         return idCategoria;
     }
 
-    public void setidCategoria(String idCategoria) {
+    public void setIdCategoria(String idCategoria) {
         this.idCategoria = idCategoria;
     }
 

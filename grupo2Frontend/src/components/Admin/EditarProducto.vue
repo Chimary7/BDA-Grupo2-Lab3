@@ -1,7 +1,7 @@
 <script setup>
 
 import {useRouter} from "vue-router";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {editProduct, getProductByID} from "../../services/productService.js";
 import {getAllCategories} from "../../services/categoryService.js";
 
@@ -17,31 +17,47 @@ const selectedCategoria = ref(null);
 
 onMounted(async () => {
   const response1 = await getAllCategories();
+  console.log(response1.data);
   categorias.value = response1.data;
 
   const response = await getProductByID(idProducto);
+  console.log(response.data);
   nombre.value = response.data.nombre;
   precio.value = response.data.precio;
   stock.value = response.data.stock;
-  selectedCategoria.value = response.data.id_categoria;
+  selectedCategoria.value = response.data.iidCategoria;
   descripcion.value = response.data.descripcion;
   estado.value = response.data.estado;
 });
 
+watch(selectedCategoria, (newValue) => {
+  console.log('selectedCategoria:', newValue);
+});
+
 const editarProducto = async() => {
-  if (nombre.value === '' || precio.value === '' || stock.value === '' || descripcion.value === '' || categoria.value === '' || selectedCategoria.value === '' || estado.value === '') {
+  if (nombre.value === '' || precio.value === '' || stock.value === '' || descripcion.value === '' || categoria.value === '' || estado.value === '') {
     alert('Todos los campos son obligatorios');
     return;
   }
 
+
+
+  if (!selectedCategoria.value){
+    alert('Seleccione una categoría');
+    return;
+  }
+
   console.log('Enviando los cambios hechos al producto');
+  console.log("Id del objeto", idProducto)
+  console.log("De tipo: ", typeof idProducto)
   const data = {
+    id: idProducto,
+    idCategoria: selectedCategoria.value,
     nombre: nombre.value,
     descripcion: descripcion.value,
     precio: precio.value,
     stock: stock.value,
-    estado: estado.value,
-    id_categoria: selectedCategoria.value
+    estado: estado.value
   }
 
   console.log(data);
@@ -96,7 +112,7 @@ const volver = () => {
             <label for="categoria" class="block text-[#71b770] font-bold mb-2">Categoría:</label>
             <select v-model="selectedCategoria" id="categoria" class="text-black w-full p-2 border border-gray-300 rounded bg-white">
               <option disabled value="">Seleccionar categoría</option>
-              <option v-for="cat in categorias" :key="cat.id_categoria" :value="cat.id_categoria">{{ cat.nombre }}</option>
+              <option v-for="cat in categorias" :key="cat.id" :value="cat.id">{{ cat.nombre }}</option>
             </select>
           </div>
         </div>
