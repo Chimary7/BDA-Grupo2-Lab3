@@ -1,8 +1,9 @@
 <template>
     <div class="bg-white min-h-screen mt-16">
-        <div class="p-6">        
+        <div class="p-24 mb-4">        
+            
             <!-- Formulario para buscar órdenes -->
-            <div class="mb-4 card bg-white p-4 border border-[#71b770] shadow-lg rounded"> 
+            <div class="mb-4 card bg-white p-4 border border-[#71b770] shadow-lg rounded" style="width: 500px;"> 
                 <h1 class="text-[#71B770] text-2xl font-bold mb-4">Órdenes Por Cliente</h1>
 
                 <label for="idCliente" class="block text-[#71b770] font-semibold">ID del Cliente:</label>
@@ -75,7 +76,6 @@
 </template>
 
 <script>
-import NavbarAdmin from './NavbarAdmin.vue';
 import { getOrdenesByIdCliente } from "../../services/OrdenService.js";
 import { getEntregaById } from "../../services/EntregaService.js";
 
@@ -102,7 +102,14 @@ export default {
         }
     },
     methods: {
+        resetData() { // Método para resetear los datos -> REPARACIÓN DE UN BUG DEL CODIGO
+            this.ordenes = [];
+            this.currentPage = 1;
+            this.totalPages = 1;
+            this.mensajeError = '';
+        },
         async fetchOrdenes() {
+            this.resetData(); // Resetear datos antes de buscar órdenes -> REPARACIÓN DE UN BUG DEL CODIGO
             this.searchCompleted = false; 
             this.mensajeError = ''; // Resetear mensaje de error
             try {
@@ -118,6 +125,7 @@ export default {
                 this.ordenes = [];
                 this.mensajeError = 'Error al buscar órdenes. Por favor, inténtelo de nuevo.';
                 this.searchCompleted = true;
+                this.$router.push('/login'); // Redirigir a la página de login
             }
         },
         formatDate(date) {
