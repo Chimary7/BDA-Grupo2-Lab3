@@ -4,12 +4,14 @@ import com.example.grupo2backend.Entities.Valoracion;
 import com.example.grupo2backend.Services.ValoracionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/valoracion")
+@PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
 public class ValoracionController {
     @Autowired
     private ValoracionService valoracionService;

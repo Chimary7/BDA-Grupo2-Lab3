@@ -2,7 +2,7 @@
 import LoginImage from '../../assets/login image.png'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { login } from '../../services/UserService.js';
+import { login, getUser } from '../../services/UserService.js';
 import { useStore } from 'vuex';
 import Alert from '../client/alert/MessageSucces.vue';
 
@@ -29,10 +29,22 @@ const Login = async () => {
     if(response.status === 200){
       store.commit('setUser', response.data);
       store.commit('login');
+
+      const idCliente = response.data.id_user;
+
+
+
+      const userData = await getUser(idCliente);
+
       success.value = true
       alertMessage.value = 'se inicio sesión correctamente';
       setTimeout(() => {
-        router.push({ name: 'Home' });
+        if(userData.data.role === 'ADMIN'){
+          router.push({name: 'HomeAdmin'});
+        } else {
+          router.push({name: 'Home'});
+
+        }
       }, 2000);
       console.log("inicia sesion correctamente")
     }
