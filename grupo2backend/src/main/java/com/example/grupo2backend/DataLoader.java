@@ -97,6 +97,15 @@ public class DataLoader implements CommandLineRunner {
         orden2.setTotal(new BigDecimal("320.00"));
         ordenRepository.save(orden2);
 
+        Orden orden3 = new Orden();
+        orden3.setIdOrden("3");
+        orden3.setFechaOrden(new Date());
+        orden3.setEstado("enviado");
+        orden3.setId_cliente("2");
+        orden3.setId_entrega("2");
+        orden3.setTotal(new BigDecimal("320.00"));
+        ordenRepository.save(orden3);
+
         // Poblar datos de prueba para DetalleOrden
         DetalleOrden detalleOrden1 = new DetalleOrden("1", "1", "1", 1, new BigDecimal("1200.00"));
         detalleOrdenRepository.save(detalleOrden1);

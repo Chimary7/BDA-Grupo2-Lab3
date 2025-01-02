@@ -4,12 +4,12 @@ import Logo from '../../assets/LOGO.png';
 
 <template>
 
-    <div class="h-24 w-full bg-[#71B770] flex justify-center items-center text-white">
+    <div class="h-16 w-full bg-[#71B770] flex justify-center items-center text-white">
         <div class="flex justify-between items-center w-full h-full px-10">
             
             <div class="h-full w-auto flex items-center justify-center">
                 <img :src="Logo" alt="logo" class="h-full w-full p-1" />
-                <p class="w-auto h-full flex items-center font-bold text-xl">Ecommerce</p>
+                <p class="w-auto h-full flex items-center font-bold">Ecommerce</p>
             </div>
 
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
