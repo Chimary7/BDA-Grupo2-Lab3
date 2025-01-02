@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ArchivosProductoRepository extends MongoRepository<ArchivosProducto, String> {
     List<ArchivosProducto> findByIdProducto(String idProducto);
+    List<ArchivosProducto> findByIdProductoAndTipo(String idProducto, String tipo);
 }
