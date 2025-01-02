@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue';
 import {deleteProductByID, getAll} from '../../services/productService.js';
+import {getFilesProductByType} from '../../services/filesService.js';
 import router from "../../router.js";
 
 const products = ref([]);
@@ -9,6 +10,7 @@ const error = ref(false);
 const showPopup = ref(false);
 const showConfirmPopup = ref(false);
 const selectedProduct = ref(null);
+const imageUrls = ref([]);
 
 const getProducts = async () => {
   loading.value = true;
@@ -16,12 +18,29 @@ const getProducts = async () => {
   try {
     const response = await getAll();
     products.value = response.data;
+    for (const product of products.value) {
+            imageUrls.value[product.id] = await ImageProduct(product.id);
+        }
   } catch (error) {
     console.log(error);
   } finally {
     loading.value = false;
   }
 };
+
+const ImageProduct = async (id) => {
+    try {
+        const response = await getFilesProductByType(id, 'PORTADA');  
+        if (response.data.length > 0) {
+            console.log(response.data[0].url);
+            return response.data[0].url;  
+        }
+        return '';  
+    } catch (error) {
+        console.log(error);
+        return '';  
+    }
+}
 
 const showProductDetails = (product) => {
   selectedProduct.value = product;
@@ -64,7 +83,7 @@ onMounted(() => {
       <p>Cargando...</p>
     </div>
     <div v-for="product in products" :key="product.id" @click="showProductDetails(product)" class="h-96 w-88 bg-white m-4 flex flex-col items-center justify-center rounded-lg border-2 border-color-secondary hover:shadow-lg hover:cursor-pointer">
-      <img :src="product.imagen" alt="Producto" class="h-1/2 w-1/2 object-cover" />
+      <img :src="imageUrls[product.id]" alt="Producto" class="h-1/2 w-1/2 object-contain" />
       <h2 class="text-xl font-bold text-black p-2">{{ product.nombre }}</h2>
       <p class="text-lg text-black p-2">${{ product.precio }}</p>
     </div>
@@ -72,7 +91,7 @@ onMounted(() => {
   <div v-if="showPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg w-2/3 h-1/2 relative flex">
       <button @click="closePopup" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 bg-transparent border-none text-2xl">✕</button>
-      <img :src="selectedProduct.imagen" alt="Producto" class="h-1/2 w-1/2 object-cover" />
+      <img :src="imageUrls[selectedProduct.id]" alt="Producto" class="h-full w-1/2 object-contain" />
       <div class="ml-8 flex flex-col justify-between">
         <div>
           <h2 class="text-2xl font-bold text-black">{{ selectedProduct.nombre }}</h2>
