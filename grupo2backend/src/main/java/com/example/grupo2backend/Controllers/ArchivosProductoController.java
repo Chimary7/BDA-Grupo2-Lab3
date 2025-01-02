@@ -3,12 +3,14 @@ package com.example.grupo2backend.Controllers;
 import com.example.grupo2backend.Entities.ArchivosProducto;
 import com.example.grupo2backend.Services.ArchivosProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/archivosproducto")
+@PreAuthorize("hasRole('ADMIN')")
 public class ArchivosProductoController {
     @Autowired
     private ArchivosProductosService archivosProductoService;
