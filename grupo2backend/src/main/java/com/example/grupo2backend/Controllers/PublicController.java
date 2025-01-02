@@ -1,8 +1,10 @@
 package com.example.grupo2backend.Controllers;
 
+import com.example.grupo2backend.Entities.ArchivosProducto;
 import com.example.grupo2backend.Entities.Categoria;
 import com.example.grupo2backend.Entities.Producto;
 import com.example.grupo2backend.Repositories.CategoriaRepository;
+import com.example.grupo2backend.Services.ArchivosProductosService;
 import com.example.grupo2backend.Services.CategoriaService;
 import com.example.grupo2backend.Services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class PublicController {
     private ProductoService productoService;
     @Autowired
     private CategoriaService categoriaService;
+    @Autowired
+    private ArchivosProductosService archivosProductosService;
 
     @GetMapping("/categorias")
     public List<Categoria> getAllCategorias() {
@@ -46,6 +50,16 @@ public class PublicController {
         return categoriaService.findCategoriaById(id);
     }
 
+    @GetMapping("/archivos/{idProducto}")
+    public List<ArchivosProducto> getArchivosProductoByIdProducto(@PathVariable String idProducto) {
+        return archivosProductosService.findArchivoProductoByIdProducto(idProducto);
+    }
+
+    @GetMapping("/archivos/{idProducto}/{tipo}")
+    public List<ArchivosProducto> getArchivosProductoByIdProductoAndTipo(@PathVariable String idProducto, @PathVariable String tipo) {
+        return archivosProductosService.findArchivoProductoByIdProductoAndTipo(idProducto, tipo);
+    }
+
     @PutMapping("/productos")
     public Boolean updateProducto(@RequestBody Producto producto) {
         return productoService.updateProducto(producto);
@@ -60,4 +74,5 @@ public class PublicController {
     public Boolean createProducto(@RequestBody Producto producto) {
         return productoService.saveProducto(producto);
     }
+
 }
