@@ -49,7 +49,6 @@ const ImageProduct = async (id) => {
     try {
         const response = await getFilesProductByType(id, 'PORTADA');  
         if (response.data.length > 0) {
-            console.log(response.data[0].url);
             return response.data[0].url;  
         }
         return '';  
