@@ -33,6 +33,10 @@ public class ArchivosProductosService {
         return archivosProductoRepository.findByIdProducto(idProducto);
     }
 
+    public List<ArchivosProducto> findArchivoProductoByIdProductoAndTipo(String idProducto, String tipo) {
+        return archivosProductoRepository.findByIdProductoAndTipo(idProducto, tipo);
+    }
+
     public Boolean updateArchivoProducto(ArchivosProducto archivoProducto) {
         try {
             archivosProductoRepository.save(archivoProducto);
