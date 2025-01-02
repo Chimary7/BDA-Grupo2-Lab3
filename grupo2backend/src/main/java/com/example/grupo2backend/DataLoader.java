@@ -80,7 +80,7 @@ public class DataLoader implements CommandLineRunner {
         Producto producto5 = new Producto("5", "5", "Pelota de fútbol", "Pelota de fútbol profesional", 25.00, 30, "disponible");
         productoRepository.save(producto5);
 
-        Producto producto6 = new Producto("5", "5", "Muñeca", "Muñeca de colección", 15.00, 40, "disponible");
+        Producto producto6 = new Producto("6", "5", "Muñeca", "Muñeca de colección", 15.00, 40, "disponible");
         productoRepository.save(producto6);
 
         // Poblar datos de prueba para ArchivosProducto

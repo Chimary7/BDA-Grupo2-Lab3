@@ -3,12 +3,14 @@ package com.example.grupo2backend.Controllers;
 import com.example.grupo2backend.Services.EntregaService;
 import com.example.grupo2backend.Entities.Entrega;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/entrega")
+@PreAuthorize("hasRole('ADMIN')")
 public class EntregaController {
     @Autowired
     private EntregaService entregaService;
@@ -29,6 +31,7 @@ public class EntregaController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public Entrega getEntregaById(@PathVariable String id) {
         return entregaService.getPedidoById(id);
     }
