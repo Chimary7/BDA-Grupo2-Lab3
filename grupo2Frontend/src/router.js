@@ -13,6 +13,7 @@ import EditarProducto from "./components/Admin/EditarProducto.vue";
 import HomeAdmin from "./components/Admin/HomeAdmin.vue";
 import AllProductsAdmin from "./components/Admin/AllProductsAdmin.vue";
 import DetalleEntrega from './components/Admin/DetalleEntrega.vue';
+import PagoCompra from './components/client/PagoCompra.vue';
 
 const routes= [
     {
@@ -57,6 +58,11 @@ const routes= [
         path: '/login',
         name: 'Login',
         component: Login
+    },
+    {
+        path: '/pago/:id',
+        name: 'PagoCompra',
+        component: PagoCompra   
     },
     {
         path: '/register',
