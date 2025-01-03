@@ -71,7 +71,7 @@ public class PublicController {
     }
 
     @PostMapping("/productos")
-    public Boolean createProducto(@RequestBody Producto producto) {
+    public String createProducto(@RequestBody Producto producto) {
         return productoService.saveProducto(producto);
     }
 

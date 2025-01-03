@@ -15,7 +15,7 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
     @PostMapping("/")
-    public Boolean saveProducto(@RequestBody Producto producto) {
+    public String saveProducto(@RequestBody Producto producto) {
         return productoService.saveProducto(producto);
     }
     @GetMapping("/")
