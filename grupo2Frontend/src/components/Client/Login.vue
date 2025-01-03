@@ -40,7 +40,7 @@ const Login = async () => {
       alertMessage.value = 'se inicio sesión correctamente';
       setTimeout(() => {
         if(userData.data.role === 'ADMIN'){
-          router.push({name: 'HomeAdmin'});
+          router.push({name: 'allProducts'});
         } else {
           router.push({name: 'Home'});
 

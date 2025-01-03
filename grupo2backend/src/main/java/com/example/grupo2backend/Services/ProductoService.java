@@ -17,13 +17,9 @@ public class ProductoService {
     @Autowired
     private DetalleOrdenService detalleOrdenService;
 
-    public Boolean saveProducto(Producto producto) {
-        try {
-            productoRepository.save(producto);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public String saveProducto(Producto producto) {
+        Producto savedProducto = productoRepository.save(producto);
+        return savedProducto.getId();
     }
 
     public List<Producto> findAll() {return productoRepository.findAll();}
