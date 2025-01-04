@@ -1,6 +1,33 @@
 <script setup>
-import Logo from '../../assets/LOGO.png';
+import { ref, onMounted } from 'vue';
+import { verifyToken } from '../../services/authService.js';import Logo from '../../assets/LOGO.png';
 import Public from './viewNavbar/NavPublic.vue';
+import Client from './viewNavbar/NavClient.vue';
+
+const tokenValid = ref(false);
+const role = ref(''); 
+
+// Función para verificar el token
+const verify = async () => {
+  try {
+    const response = await verifyToken();
+    if (response?.success) {
+      tokenValid.value = true;
+      role.value = response.role;
+    } else {
+      tokenValid.value = false;
+    }
+  } catch (error) {
+    console.error('Error al verificar el token:', error);
+    tokenValid.value = false;
+  }
+};
+
+// Verificar token cuando el componente se monta
+onMounted(() => {
+  verify();
+});
+
 </script>
 
 <template>
@@ -11,7 +38,8 @@ import Public from './viewNavbar/NavPublic.vue';
                 <p class="w-auto h-full flex items-center font-bold">Ecommerce</p>
             </div>
             <div class="h-full p-2">
-                <Public />
+                <Public v-if="!tokenValid || role == 'ADMIN'" />
+                <Client v-else />
             </div>
         </div>
     </div>

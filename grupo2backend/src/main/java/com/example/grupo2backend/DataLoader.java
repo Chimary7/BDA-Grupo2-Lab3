@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import static com.example.grupo2backend.utils.TipoArchivosProducto.PORTADA;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -33,6 +35,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     private ValoracionRepository valoracionRepository;
+
+    @Autowired
+    private ArchivosProductoRepository archivosProductoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -75,8 +80,22 @@ public class DataLoader implements CommandLineRunner {
         Producto producto5 = new Producto("5", "5", "Pelota de fútbol", "Pelota de fútbol profesional", 25.00, 30, "disponible");
         productoRepository.save(producto5);
 
-        Producto producto6 = new Producto("5", "5", "Muñeca", "Muñeca de colección", 15.00, 40, "disponible");
+        Producto producto6 = new Producto("6", "5", "Muñeca", "Muñeca de colección", 15.00, 40, "disponible");
         productoRepository.save(producto6);
+
+        // Poblar datos de prueba para ArchivosProducto
+        ArchivosProducto archivosProducto1 = new ArchivosProducto("1", "1", "carpeta/Eccomerce/wra6alg77z2jlkcq6yxd",PORTADA ,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776879/carpeta/Eccomerce/wra6alg77z2jlkcq6yxd.jpg");
+        archivosProductoRepository.save(archivosProducto1);
+        ArchivosProducto archivosProducto2 = new ArchivosProducto("2", "2", "carpeta/Eccomerce/wupdewcf4hbwill4yyhy",PORTADA ,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776878/carpeta/Eccomerce/wupdewcf4hbwill4yyhy.jpg");
+        archivosProductoRepository.save(archivosProducto2);
+        ArchivosProducto archivosProducto3 = new ArchivosProducto("3", "3", "carpeta/Eccomerce/eqcraf2jmprjff10neuo",PORTADA,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776879/carpeta/Eccomerce/eqcraf2jmprjff10neuo.jpg");
+        archivosProductoRepository.save(archivosProducto3);
+        ArchivosProducto archivosProducto4 = new ArchivosProducto("4", "4", "carpeta/Eccomerce/hswtijhekwrmpzsq8zyi",PORTADA,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776879/carpeta/Eccomerce/hswtijhekwrmpzsq8zyi.webp");
+        archivosProductoRepository.save(archivosProducto4);
+        ArchivosProducto archivosProducto5 = new ArchivosProducto("5", "5", "carpeta/Eccomerce/bxtesy9uk4kau9pcg8rd",PORTADA,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776879/carpeta/Eccomerce/bxtesy9uk4kau9pcg8rd.png");
+        archivosProductoRepository.save(archivosProducto5);
+        ArchivosProducto archivosProducto6 = new ArchivosProducto("6", "6", "carpeta/Eccomerce/mumvxr6e80rtbxbnrqvw",PORTADA,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776879/carpeta/Eccomerce/mumvxr6e80rtbxbnrqvw.webp");
+        archivosProductoRepository.save(archivosProducto6);
 
         // Poblar datos de prueba para Orden
         Orden orden1 = new Orden();

@@ -3,17 +3,19 @@ package com.example.grupo2backend.Controllers;
 import com.example.grupo2backend.Entities.Producto;
 import com.example.grupo2backend.Services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/producto")
+@PreAuthorize("hasRole('ADMIN')")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
     @PostMapping("/")
-    public Boolean saveProducto(@RequestBody Producto producto) {
+    public String saveProducto(@RequestBody Producto producto) {
         return productoService.saveProducto(producto);
     }
     @GetMapping("/")
