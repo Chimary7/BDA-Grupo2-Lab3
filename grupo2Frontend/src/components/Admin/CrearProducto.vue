@@ -184,9 +184,10 @@ const removeArchivo = (index) => {
               <h2 class="text-lg font-bold">Archivos Seleccionados:</h2>
               <ul>
                 <li v-for="(file, index) in selectedArchivos" :key="index" class="flex justify-between items-center">
-                  <img :src="archivoPreviews[index]" alt="Vista previa archivo" class="w-16 h-16 object-cover rounded" />
+                  <img v-if="file.type.startsWith('image/')" :src="archivoPreviews[index]" alt="Vista previa archivo" class="w-16 h-16 object-cover rounded" />
+                  <video v-else-if="file.type.startsWith('video/')" :src="archivoPreviews[index]" class="w-16 h-16 object-cover rounded"></video>
                   {{ file.name }}
-                  <button @click="removeArchivo(index)" class="text-red-500 bg-white border border-red-400 roundend-lg">Eliminar</button>
+                  <button @click="removeArchivo(index)" class="text-red-500 bg-white border border-red-400 rounded-lg">Eliminar</button>
                 </li>
               </ul>
             </div>

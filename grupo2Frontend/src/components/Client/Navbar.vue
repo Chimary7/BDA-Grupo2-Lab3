@@ -4,15 +4,22 @@ import { verifyToken } from '../../services/authService.js';import Logo from '..
 import Public from './viewNavbar/NavPublic.vue';
 import Client from './viewNavbar/NavClient.vue';
 
-const tokenValid = ref(false); // Variable reactiva para controlar si el token es válido
+const tokenValid = ref(false);
+const role = ref(''); 
 
 // Función para verificar el token
 const verify = async () => {
   try {
     const response = await verifyToken();
-    tokenValid.value = response;
+    if (response?.success) {
+      tokenValid.value = true;
+      role.value = response.role;
+    } else {
+      tokenValid.value = false;
+    }
   } catch (error) {
-    tokenValid.value = false; 
+    console.error('Error al verificar el token:', error);
+    tokenValid.value = false;
   }
 };
 
@@ -31,7 +38,7 @@ onMounted(() => {
                 <p class="w-auto h-full flex items-center font-bold">Ecommerce</p>
             </div>
             <div class="h-full p-2">
-                <Public v-if="!tokenValid" />
+                <Public v-if="!tokenValid || role == 'ADMIN'" />
                 <Client v-else />
             </div>
         </div>

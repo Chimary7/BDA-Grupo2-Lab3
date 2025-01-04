@@ -13,7 +13,8 @@ import EditarProducto from "./components/Admin/EditarProducto.vue";
 import HomeAdmin from "./components/Admin/HomeAdmin.vue";
 import AllProductsAdmin from "./components/Admin/AllProductsAdmin.vue";
 import DetalleEntrega from './components/Admin/DetalleEntrega.vue';
-import PagoCompra from './components/client/PagoCompra.vue';
+import CarritoPay from './components/client/CarritoPay.vue';
+import {auth} from './services/authService';
 
 const routes= [
     {
@@ -43,14 +44,23 @@ const routes= [
                 ]
             },
             {
+                path: '/carrito',
+                name: 'Carrito',
+                component: CarritoPay
+            },
+            {
                 path: 'historial',
                 name: 'OrderList',
-                component: OrderList
+                component: OrderList,
+                meta: { roles: ['CLIENT'] },
+                beforeEnter: auth
             },
             {
                 path: 'detalles/:id',
                 name: 'DetailsOrder',
                 component: DetallesOrden,
+                meta: { roles: ['CLIENT'] },
+                beforeEnter: auth
             }
         ]
     },
@@ -58,11 +68,6 @@ const routes= [
         path: '/login',
         name: 'Login',
         component: Login
-    },
-    {
-        path: '/pago/:id',
-        name: 'PagoCompra',
-        component: PagoCompra   
     },
     {
         path: '/register',
@@ -77,27 +82,37 @@ const routes= [
             {
                 path: 'allProducts',
                 name: 'allProducts',
-                component: AllProductsAdmin
+                component: AllProductsAdmin,
+                meta: { roles: ['ADMIN'] },
+                beforeEnter: auth
             },
             {
                 path: 'CrearProducto',
                 name: 'CrearProducto',
-                component: CrearProducto
+                component: CrearProducto,
+                meta: { roles: ['ADMIN'] },
+                beforeEnter: auth
             },
             {
                 path: 'EditarProducto/:id',
                 name: 'EditarProducto',
-                component: EditarProducto
+                component: EditarProducto,
+                meta: { roles: ['ADMIN'] },
+                beforeEnter: auth
             },
             {
                 path: 'OrdenPorCliente',
                 name: 'OrdenPorCliente',
-                component: OrdenPorCliente
+                component: OrdenPorCliente,
+                meta: { roles: ['ADMIN'] },
+                beforeEnter: auth
             },
             {
                 path: '/entrega/:id',
                 name: 'DetalleEntrega',
-                component: DetalleEntrega
+                component: DetalleEntrega,
+                meta: { roles: ['ADMIN'] },
+                beforeEnter: auth
             }
         ]
     }
