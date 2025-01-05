@@ -53,6 +53,8 @@ const routes= [
                         path: 'ValorationProduct/:idProducto',
                         name: 'ValorationProduct',
                         component: ValorationProduct,
+                        meta: { roles: ['CLIENT'] },
+                        beforeEnter: auth,
                         props: true
                     }
                 ]
@@ -60,7 +62,9 @@ const routes= [
             {
                 path: '/carrito',
                 name: 'Carrito',
-                component: CarritoPay
+                component: CarritoPay,
+                meta: { roles: ['CLIENT'] },
+                beforeEnter: auth
             },
             {
                 path: 'historial',
@@ -79,7 +83,9 @@ const routes= [
             {
                 path: '/metodoPago',
                 name: 'MetodoPago',
-                component: PagarCarro
+                component: PagarCarro,
+                meta: { roles: ['CLIENT'] },
+                beforeEnter: auth
             }
         ]
     },
@@ -98,6 +104,9 @@ const routes= [
         name: 'HomeAdmin',
         component: HomeAdmin,
         children: [
+            {
+                path: '/HomeAdmin', redirect: { name: 'allProducts' }
+            },
             {
                 path: 'allProducts',
                 name: 'allProducts',

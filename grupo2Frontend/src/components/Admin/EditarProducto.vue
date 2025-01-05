@@ -46,6 +46,7 @@ onMounted(async () => {
       tipo: file.tipo,
       url: file.url,
     }));
+    console.log(galeriaURLs.value);
 });
 
 
@@ -65,6 +66,7 @@ const editarProducto = async() => {
     }
 
     const data = {
+      id: idProducto,
       nombre: nombre.value,
       descripcion: descripcion.value,
       precio: precio.value,
@@ -74,6 +76,8 @@ const editarProducto = async() => {
     }
 
     await editProduct(data);
+    alert('Producto editado correctamente');
+    router.push({name: 'allProducts'});
 }
 
 const onPortadaSelected = async (event) => {

@@ -35,3 +35,21 @@ export const verifyToken = async () => {
       return false;
     }
 };
+
+export const logout = async () => {
+  try {
+    const response = await httpClient.post("/auth/logout", {
+      withCredentials: true,
+    });
+    if (response.status === 200) {
+      console.log("Usuario deslogueado");
+      return true;
+    } else {
+      console.log("Error al desloguear");
+      return false;
+    }
+  } catch (error) {
+    console.log("Error al desloguear", error);
+    return false;
+  }
+};
