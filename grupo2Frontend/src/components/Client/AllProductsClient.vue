@@ -5,7 +5,10 @@ import { getFilesProductByType } from '../../services/filesService';
 import { useRouter } from 'vue-router';
 import { getValorationsByIdProducto, getPromedioValoracionProducto } from '../../services/ValorationService';
 import Carousel from './component/CarrouselProduct.vue';
+import { useStore } from 'vuex';
 
+
+const store = useStore();
 const products = ref([]);
 const loading = ref(false);
 const error = ref(false);
@@ -15,6 +18,7 @@ const selectedProduct = ref(null);
 const archivosURLSelectedProduct = ref([]);
 const valoracionesSelectedProduct = ref([]);
 const PromedioSelectedProduct = ref(0);
+const cantidad = ref(1);
 
 const props = defineProps({
     searchQuery: String
@@ -119,9 +123,14 @@ const ImageProduct = async (id) => {
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // BOTON PENDIENTE DE IMPLEMENTAR
 const addToCart = () => {
-    // Logic to add the product to the cart
-    console.log('Producto añadido al carro:', selectedProduct.value.id);
-    closeModal();
+    if (selectedProduct.value) {
+        const productWithQuantity = {
+            ...selectedProduct.value,
+            cantidad: cantidad.value
+        };
+        store.dispatch('addProductoToCarrito', productWithQuantity);
+        closeModal();
+    }
 };
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -159,6 +168,7 @@ const valoracion = () => {
                             <p class="text-lg text-left text-black mt-2">Descripción: {{ selectedProduct.descripcion }}</p>
                             <p class="text-lg text-left text-black font-medium mt-2">valoración: {{ PromedioSelectedProduct }}</p>
                             <p class="text-lg text-left text-black mt-2">Stock disponible: {{ selectedProduct.stock }}</p>
+                            <input type="number" v-model="cantidad" :max="selectedProduct.stock" min="1" required class="mt-4 p-4 border rounded w-full bg-white" placeholder="Cantidad" />
                         </div>
                     </div>
                     <div class="mt-8 flex flex-col">
