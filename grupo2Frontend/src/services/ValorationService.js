@@ -2,7 +2,7 @@ import httpClient from "../http-common";
 
 export const getValorationsByIdProducto = async (idProducto) => {
     try{
-        const response = await httpClient.get(`/valoracion/producto/${idProducto}`);
+        const response = await httpClient.get(`/public/producto/${idProducto}`);
         console.log(response.data)
         return response.data;
     }
@@ -13,7 +13,7 @@ export const getValorationsByIdProducto = async (idProducto) => {
 
 export const getPromedioValoracionProducto = async (idProducto) => {
     try{
-        const response = await httpClient.get(`/valoracion/valoracionProducto/${idProducto}`);
+        const response = await httpClient.get(`/public/valoracionProducto/${idProducto}`);
         return response.data;
     }
     catch(error){

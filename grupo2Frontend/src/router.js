@@ -21,7 +21,7 @@ import PagarCarro from './components/client/PagarCarro.vue';
 
 const routes= [
     {
-        path: '/', redirect: { name: 'Home'}
+        path: '/', redirect: { name: 'Inicio'}
     },
     {
         path: '/home',
