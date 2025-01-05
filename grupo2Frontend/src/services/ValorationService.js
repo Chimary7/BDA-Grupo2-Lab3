@@ -20,3 +20,12 @@ export const getPromedioValoracionProducto = async (idProducto) => {
         console.log("Error al obtener promedio de valoraciones por idProducto: ", error.message);
     }
 }
+
+export const createValoracion = async (valoracionData) => {
+    try {
+        const response = await httpClient.post('/valoracion/', valoracionData);
+        return response.data;
+    } catch (error) {
+        console.log("Error al crear la valoración: ", error.message);
+    }
+};
