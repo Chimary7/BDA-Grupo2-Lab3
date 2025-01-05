@@ -40,6 +40,7 @@ public class ProductoController {
     }
 
     @GetMapping("/byDetalleOrden/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public List<Producto> getProductoByDetalleOrden(@PathVariable String id) {
         return productoService.findProductoByDetalleOrden(id);
     }
