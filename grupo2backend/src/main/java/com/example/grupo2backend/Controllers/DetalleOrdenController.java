@@ -15,7 +15,7 @@ public class DetalleOrdenController {
     private DetalleOrdenService detalleOrdenService;
 
     @PostMapping("/")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public void saveDetalleOrden(@RequestBody DetalleOrden detalleOrden) {
         detalleOrdenService.saveDetalleOrden(detalleOrden);
     }

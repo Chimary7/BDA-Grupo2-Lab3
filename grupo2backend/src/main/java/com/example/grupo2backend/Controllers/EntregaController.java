@@ -10,22 +10,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/entrega")
-@PreAuthorize("hasRole('ADMIN')")
 public class EntregaController {
     @Autowired
     private EntregaService entregaService;
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public void saveEntrega(@RequestBody Entrega entrega) {
         entregaService.guardar(entrega);
     }
 
     @PutMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateEntrega(@RequestBody Entrega entrega) {
         entregaService.updateEntrega(entrega);
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Entrega> getAllEntregas() {
         return entregaService.getAllPedidos();
     }
@@ -37,6 +39,7 @@ public class EntregaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteEntregaById(@PathVariable String id) {
         entregaService.deletePedido(id);
     }

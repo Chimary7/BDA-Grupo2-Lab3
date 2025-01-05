@@ -34,6 +34,7 @@
               <!-- <p><strong>ID Valoración:</strong> {{ valoracion.id }}</p>
               <p><strong>ID Cliente:</strong> {{ valoracion.idCliente }}</p>
               <p><strong>ID Producto:</strong> {{ valoracion.idProducto }}</p> -->
+              <p><strong>ID Cliente:</strong> {{ valoracion.idCliente }}</p>
               <p><strong>Valoración:</strong> {{ valoracion.valoracion }}</p>
               <p><strong>Comentario:</strong> {{ valoracion.comentario }}</p>
             </div>
@@ -49,7 +50,8 @@
 </template>
 
 <script>
-import { getValorationsByIdProducto, getPromedioValoracionProducto, createValoracion} from '../../services/ValorationService';
+import { getValorationsByIdProducto, getPromedioValoracionProducto, createValoracion } from '../../services/ValorationService';
+import { useStore } from 'vuex';
 
 export default {
   props: {
@@ -99,8 +101,9 @@ export default {
     // APLICAR EVALUACIÓN DEL PRODUCTO
     async submitEvaluation() {
       try {
+        const User = this.$store.getters.getUser; // Obtener el usuario autenticado
         const valoracionData = {
-          idCliente: 'ID_DEL_CLIENTE', // Reemplaza con el ID del cliente real
+          idCliente: User.id_user, // Usar el ID del cliente autenticado
           idProducto: this.idProducto,
           valoracion: this.newValoracion.valoracion,
           comentario: this.newValoracion.comentario
