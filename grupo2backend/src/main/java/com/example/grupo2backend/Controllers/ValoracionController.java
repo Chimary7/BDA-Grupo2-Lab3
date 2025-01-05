@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/valoracion")
-@PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
 public class ValoracionController {
     @Autowired
     private ValoracionService valoracionService;
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public ResponseEntity<?> saveValoracion(@RequestBody Valoracion valoracion) {
         try {
             Boolean result = valoracionService.saveValoracion(valoracion);
@@ -27,35 +27,42 @@ public class ValoracionController {
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Valoracion> getAllValoraciones() {
         return valoracionService.findAll();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Valoracion getValoracionById(@PathVariable String id) {
         return valoracionService.findValoracionById(id);
     }
 
     @GetMapping("/producto/{idProducto}")
+    @PreAuthorize("permitAll()")
     public List<Valoracion> getValoracionByIdProducto(@PathVariable String idProducto) {
         return valoracionService.findValoracionByIdProducto(idProducto);
     }
 
     @GetMapping("/cliente/{idCliente}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public List<Valoracion> getValoracionByIdCliente(@PathVariable String idCliente) {
         return valoracionService.findValoracionByIdCliente(idCliente);
     }
 
     @PutMapping("/")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public Boolean updateValoracion(@RequestBody Valoracion valoracion) {
         return valoracionService.updateValoracion(valoracion);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     public Boolean deleteValoracionById(@PathVariable String id) {
         return valoracionService.deleteValoracionById(id);
     }
 
     @GetMapping("/valoracionProducto/{idProducto}")
+    @PreAuthorize("permitAll()")
     public Double getPromedioValoracionProducto(@PathVariable String idProducto) {
         return valoracionService.valoracionPromedioProducto(idProducto);
     }

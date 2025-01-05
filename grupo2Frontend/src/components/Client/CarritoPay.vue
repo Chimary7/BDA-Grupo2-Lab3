@@ -6,18 +6,6 @@ import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
 
-const testProducts = [
-  { id: 1, name: "Producto A", precio_unitario: 10000, cantidad: 2 },
-  { id: 2, name: "Producto B", precio_unitario: 15000, cantidad: 1 },
-  { id: 3, name: "Producto C", precio_unitario: 20000, cantidad: 3 },
-];
-
-// Inicializar el carrito con datos de prueba
-store.commit("clearCarrrito");
-testProducts.forEach((product) => {
-  store.commit("addProductoToCarrito", product);
-});
-
 // Computed property para obtener los items del carrito
 const itemsCarrito = computed(() => store.state.carrito);
 
