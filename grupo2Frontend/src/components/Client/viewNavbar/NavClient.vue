@@ -16,8 +16,8 @@ const CerrarSesion = () => {
 }
 
 const Pagar = () => {
-    router.push({ name: 'PagoCompra', params: { id: 1 } }); // PLACEHOLDER -> VER COMO REDIGIR CON LA ID DEL CLIENTE
-    // router.push({ name: 'Pagar' });
+    router.push({ name: 'Carrito', params: { id: 1 } }); // PLACEHOLDER -> VER COMO REDIGIR CON LA ID DEL CLIENTE
+    router.push({ name: 'Pagar' });
 }
 </script>
 <template>

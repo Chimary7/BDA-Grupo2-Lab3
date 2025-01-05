@@ -1,16 +1,37 @@
 <template>
-  <div class="bg-white min-h-screen mt-16">
-    <div class="p-6 mb-4">        
-      <div class="mb-4 card bg-white p-4 border border-[#71b770] shadow-lg rounded max-w-lg mx-auto"> 
+  <div class="bg-white min-h-screen mt-16 flex justify-center">
+    <div class="p-6 mb-4 w-1/3">
+      <div class="card bg-white p-4 border border-[#71b770] shadow-lg rounded min-h-card">
+        <h2 class="text-[#71B770] text-2xl font-bold mb-4">Evaluar Producto</h2>
+        <form @submit.prevent="submitEvaluation">
+          <div class="mb-4">
+            <label for="valoracion" class="block text-gray-700 font-bold mb-2">Valoración:</label>
+            <select id="valoracion" v-model="newValoracion.valoracion" class="shadow appearance-none bg-white border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+              <option value="" disabled selected>Selecciona una valoración</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="comentario" class="block text-gray-700 font-bold mb-2">Comentario:</label>
+            <textarea id="comentario" v-model="newValoracion.comentario" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white " required></textarea>
+          </div>
+          <button type="submit" class="bg-[#71b770] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar Evaluación</button>
+        </form>
+      </div>
+    </div>
+    <div class="p-6 mb-4 w-1/3">
+      <div class="card bg-white p-4 border border-[#71b770] shadow-lg rounded min-h-card">
         <h2 class="text-[#71B770] text-2xl font-bold mb-4">Valoraciones del Producto</h2>
-
         <div v-if="loading" class="text-center">Cargando valoraciones...</div>
-
-        <div v-else>
+        <div v-else>  
           <div v-if="error" class="error text-red-600 font-semibold">{{ error }}</div>
           <div v-else>
             <div v-for="valoracion in valoraciones" :key="valoracion.id" class="valoracion border border-gray-300 rounded p-4 mb-4">
-              <p><strong>ID Valoración:</strong> {{ valoracion.id }}</p>   
+              <p><strong>ID Valoración:</strong> {{ valoracion.id }}</p>
               <p><strong>ID Cliente:</strong> {{ valoracion.idCliente }}</p>
               <p><strong>ID Producto:</strong> {{ valoracion.idProducto }}</p>
               <p><strong>Valoración:</strong> {{ valoracion.valoracion }}</p>
@@ -43,6 +64,10 @@ export default {
       promedio: null,
       loading: true,
       error: null,
+      newValoracion: {
+        valoracion: '',
+        comentario: ''
+      }
     };
   },
   methods: {
@@ -50,7 +75,6 @@ export default {
       this.loading = true;
       this.error = null;
       try {
-        // Asegurarse de que las respuestas sean válidas
         const valoracionesData = await getValorationsByIdProducto(this.idProducto);
         if (valoracionesData && valoracionesData.length > 0) {
           this.valoraciones = valoracionesData;
@@ -71,9 +95,16 @@ export default {
         this.loading = false;
       }
     },
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // APLICAR EVALUACIÓN DEL PRODUCTO
+    async submitEvaluation() {
+      // Implementar la lógica para enviar la evaluación
+      console.log(this.newValoracion);
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
   },
   mounted() {
-    this.fetchValoraciones(); // Llamada a la función de carga de valoraciones cuando el componente se monta
+    this.fetchValoraciones();
   },
 };
 </script>
