@@ -22,6 +22,9 @@ const fetchFeaturedProducts = async () => {
     try {
         const response1 = await getProductCategory(1);
         const response5 = await getProductCategory(5);
+
+        console.log('Response 1:', response1);
+        console.log('Response 5:', response5);
         
         // Combinar productos de ambas categorías
         featuredProducts.value = [...response1.data, ...response5.data];
@@ -47,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="h-full w-full bg-white flex flex-col">
+    <div class="h-full w-full bg-white flex flex-col overflow-y-auto">
         <div class="mt-8">
             <Carrousel :items="fotos"/>
         </div>

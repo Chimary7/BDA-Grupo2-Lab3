@@ -3,11 +3,14 @@ package com.example.grupo2backend.Controllers;
 import com.example.grupo2backend.Entities.ArchivosProducto;
 import com.example.grupo2backend.Entities.Categoria;
 import com.example.grupo2backend.Entities.Producto;
+import com.example.grupo2backend.Entities.Valoracion;
 import com.example.grupo2backend.Repositories.CategoriaRepository;
 import com.example.grupo2backend.Services.ArchivosProductosService;
 import com.example.grupo2backend.Services.CategoriaService;
 import com.example.grupo2backend.Services.ProductoService;
+import com.example.grupo2backend.Services.ValoracionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,8 @@ public class PublicController {
     private CategoriaService categoriaService;
     @Autowired
     private ArchivosProductosService archivosProductosService;
+    @Autowired
+    private ValoracionService valoracionService;
 
     @GetMapping("/categorias")
     public List<Categoria> getAllCategorias() {
@@ -75,4 +80,13 @@ public class PublicController {
         return productoService.saveProducto(producto);
     }
 
+    @GetMapping("/valoracionProducto/{idProducto}")
+    public Double getPromedioValoracionProducto(@PathVariable String idProducto) {
+        return valoracionService.valoracionPromedioProducto(idProducto);
+    }
+
+    @GetMapping("/producto/{idProducto}")
+    public List<Valoracion> getValoracionByIdProducto(@PathVariable String idProducto) {
+        return valoracionService.findValoracionByIdProducto(idProducto);
+    }
 }

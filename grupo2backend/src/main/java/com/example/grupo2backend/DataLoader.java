@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import static com.example.grupo2backend.utils.TipoArchivosProducto.ARCHIVO;
 import static com.example.grupo2backend.utils.TipoArchivosProducto.PORTADA;
 
 @Component
@@ -96,6 +97,8 @@ public class DataLoader implements CommandLineRunner {
         archivosProductoRepository.save(archivosProducto5);
         ArchivosProducto archivosProducto6 = new ArchivosProducto("6", "6", "carpeta/Eccomerce/mumvxr6e80rtbxbnrqvw",PORTADA,"https://res.cloudinary.com/dqyerfklb/image/upload/v1735776879/carpeta/Eccomerce/mumvxr6e80rtbxbnrqvw.webp");
         archivosProductoRepository.save(archivosProducto6);
+        ArchivosProducto archivosProducto7 = new ArchivosProducto("7","5", "carpeta/Eccomerce/hplzrukztv8o1eiytlfm",ARCHIVO,"https://res.cloudinary.com/dqyerfklb/video/upload/v1736100627/carpeta/Eccomerce/hplzrukztv8o1eiytlfm.mp4");
+        archivosProductoRepository.save(archivosProducto7);
 
         // Poblar datos de prueba para Orden
         Orden orden1 = new Orden();
