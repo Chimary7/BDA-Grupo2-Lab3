@@ -11,8 +11,18 @@ const VerOrdenes = () => {
 }
 
 const CerrarSesion = () => {
-    // Lógica para cerrar sesión
-    router.push({ name: 'Login' });
+    try{
+        const response = logout();
+        console.log('Response:', response);
+
+        store.commit('logout');
+        store.commit('clearUser');
+        store.commit('clearOrder');
+        alert('Sesión cerrada exitosamente');
+        window.location.reload();
+    }catch(error){
+        alert('Error al cerrar sesión');
+    }
 }
 
 const Pagar = () => {
