@@ -3,6 +3,10 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
+import { saveOrden } from "../../services/OrdenService";
+import { saveDetalleOrden } from "../../services/DetalleOrdenService";
+import { saveEntrega } from "../../services/EntregaService";
+
 const store = useStore();
 const router = useRouter();
 
@@ -24,13 +28,54 @@ const disminuirCantidad = (item) => {
 const totalCarrito = computed(() => {
   return itemsCarrito.value.reduce((total, item) => total + item.precio_unitario * item.cantidad, 0);
 });
+
+// Obtener el usuario autenticado
+const User = store.getters.getUser;
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // IMPLEMENTAR CRER ORDEN, DETALLE ORDEN Y ENTREGA
-const crearOrden = () => {
-  // Lógica para crear la orden y los detalles de la orden
-  console.log("Orden creada con dirección:", direccion.value);
-  
-  router.push({ name: 'MetodoPago' });
+const crearOrden = async () => {
+  const orden = {
+    id: Date.now().toString(),
+    fechaOrden: new Date(),
+    estado: "Pendiente",
+    idCliente: User.id_user, // Aquí puedes usar el ID del cliente autenticado
+    idEntrega: Date.now().toString(),
+    total: totalCarrito.value
+  };
+
+  const detallesOrden = itemsCarrito.value.map(item => ({
+    id: Date.now().toString() + item.id,
+    idOrden: orden.id,
+    idProducto: item.id,
+    cantidad: item.cantidad,
+    precio_unitario: item.precio_unitario
+  }));
+
+  const entrega = {
+    id: orden.idEntrega,
+    idZona: "Zona 1", // Puedes ajustar esto según tu lógica de zonas
+    idCliente: orden.idCliente,
+    coordenadaDireccion: { type: "Point", coordinates: [40.7128, -74.0060] }, // Ajusta las coordenadas según sea necesario
+    direccion: direccion.value,
+    estado: "En camino"
+  };
+
+  try {
+    await saveOrden(orden);
+    for (const detalle of detallesOrden) {
+      await saveDetalleOrden(detalle);
+    }
+    await saveEntrega(entrega);
+
+    console.log("Orden:", orden);
+    console.log("Detalles de la Orden:", detallesOrden);
+    console.log("Entrega:", entrega);
+
+    router.push({ name: 'MetodoPago' });
+  } catch (error) {
+    console.error("Error al crear la orden:", error);
+  }
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 </script>
