@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from './components/client/HomeClient.vue';
+import FrontPage from './components/client/FrontPage.vue';
 import Register from './components/client/Register.vue';
 import Login from './components/client/Login.vue';
 import Products from './components/client/ProductContainer.vue';
@@ -27,6 +28,11 @@ const routes= [
         name: 'Home',
         component: Home,
         children: [
+            {
+                path: 'inicio',
+                name: 'Inicio',
+                component: FrontPage
+            },
             {
                 path: 'products',
                 name: 'Products',
