@@ -9,3 +9,13 @@ export const getEntregaById = async (id) => {
         throw error;
     }
 }
+
+export const saveEntrega = async (entrega) => {
+    try {
+        const response = await httpClient.post("/entrega/", entrega);
+        return response.data;
+    } catch (error) {
+        console.error("Error al guardar la entrega:", error.response ? error.response.data : error);
+        throw error;
+    }
+};

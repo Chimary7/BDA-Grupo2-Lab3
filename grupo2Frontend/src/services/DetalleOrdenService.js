@@ -18,3 +18,13 @@ export const getDetalleOrdenByIdOrden = async (idOrden) => {
         }
     }
 }
+
+export const saveDetalleOrden = async (detalleOrden) => {
+    try {
+        const response = await httpClient.post("/detalleOrden/", detalleOrden);
+        return response.data;
+    } catch (error) {
+        console.error("Error al guardar el detalle de la orden:", error.response ? error.response.data : error);
+        throw error;
+    }
+};

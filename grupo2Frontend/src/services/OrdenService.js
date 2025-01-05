@@ -9,3 +9,13 @@ export const getOrdenesByIdCliente = async(idCliente) => {
         throw error;
     }
 }
+
+export const saveOrden = async (orden) => {
+    try {
+        const response = await httpClient.post("/orden/", orden);
+        return response.data;
+    } catch (error) {
+        console.error("Error al guardar la orden:", error.response ? error.response.data : error);
+        throw error;
+    }
+};
