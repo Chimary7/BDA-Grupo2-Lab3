@@ -31,9 +31,9 @@
           <div v-if="error" class="error text-red-600 font-semibold">{{ error }}</div>
           <div v-else>
             <div v-for="valoracion in valoraciones" :key="valoracion.id" class="valoracion border border-gray-300 rounded p-4 mb-4">
-              <p><strong>ID Valoración:</strong> {{ valoracion.id }}</p>
+              <!-- <p><strong>ID Valoración:</strong> {{ valoracion.id }}</p>
               <p><strong>ID Cliente:</strong> {{ valoracion.idCliente }}</p>
-              <p><strong>ID Producto:</strong> {{ valoracion.idProducto }}</p>
+              <p><strong>ID Producto:</strong> {{ valoracion.idProducto }}</p> -->
               <p><strong>Valoración:</strong> {{ valoracion.valoracion }}</p>
               <p><strong>Comentario:</strong> {{ valoracion.comentario }}</p>
             </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { getValorationsByIdProducto, getPromedioValoracionProducto } from '../../services/ValorationService';
+import { getValorationsByIdProducto, getPromedioValoracionProducto, createValoracion} from '../../services/ValorationService';
 
 export default {
   props: {
@@ -98,8 +98,18 @@ export default {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // APLICAR EVALUACIÓN DEL PRODUCTO
     async submitEvaluation() {
-      // Implementar la lógica para enviar la evaluación
-      console.log(this.newValoracion);
+      try {
+        const valoracionData = {
+          idCliente: 'ID_DEL_CLIENTE', // Reemplaza con el ID del cliente real
+          idProducto: this.idProducto,
+          valoracion: this.newValoracion.valoracion,
+          comentario: this.newValoracion.comentario
+        };
+        await createValoracion(valoracionData);
+        this.fetchValoraciones(); // Refresca las valoraciones después de enviar la nueva
+      } catch (error) {
+        console.log("Error al enviar la evaluación: ", error.message);
+      }
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
   },
