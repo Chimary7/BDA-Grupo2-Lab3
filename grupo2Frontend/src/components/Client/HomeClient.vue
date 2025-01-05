@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from './Navbar.vue'
 </script>
+
 <template>
     <div class="h-full w-full bg-white flex flex-col">
         <Navbar />

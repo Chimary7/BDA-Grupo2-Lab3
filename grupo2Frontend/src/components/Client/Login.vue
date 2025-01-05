@@ -42,7 +42,7 @@ const Login = async () => {
         if(userData.data.role === 'ADMIN'){
           router.push({name: 'allProducts'});
         } else {
-          router.push({name: 'Home'});
+          router.push({name: 'Inicio'});
 
         }
       }, 2000);
