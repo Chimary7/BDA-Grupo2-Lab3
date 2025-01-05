@@ -43,7 +43,6 @@ const Login = async () => {
           router.push({name: 'allProducts'});
         } else {
           router.push({name: 'Inicio'});
-
         }
       }, 2000);
       console.log("inicia sesion correctamente")

@@ -1,9 +1,24 @@
 <script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 const store = useStore();
+const router = useRouter();
 
+const testProducts = [
+  { id: 1, name: "Producto A", precio_unitario: 10000, cantidad: 2 },
+  { id: 2, name: "Producto B", precio_unitario: 15000, cantidad: 1 },
+  { id: 3, name: "Producto C", precio_unitario: 20000, cantidad: 3 },
+];
+
+// Inicializar el carrito con datos de prueba
+store.commit("clearCarrrito");
+testProducts.forEach((product) => {
+  store.commit("addProductoToCarrito", product);
+});
+
+// Computed property para obtener los items del carrito
 const itemsCarrito = computed(() => store.state.carrito);
 
 const incrementarCantidad = (item) => {
@@ -17,6 +32,19 @@ const disminuirCantidad = (item) => {
     store.commit("RemoveProductoFromCarrito", item.id);
   }
 };
+
+const totalCarrito = computed(() => {
+  return itemsCarrito.value.reduce((total, item) => total + item.precio_unitario * item.cantidad, 0);
+});
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// IMPLEMENTAR CRER ORDEN, DETALLE ORDEN Y ENTREGA
+const crearOrden = () => {
+  // Lógica para crear la orden y los detalles de la orden
+  console.log("Orden creada con dirección:", direccion.value);
+  
+  router.push({ name: 'MetodoPago' });
+};
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 </script>
 
 <template>
@@ -56,12 +84,33 @@ const disminuirCantidad = (item) => {
           </li>
         </ul>
       </div>
-      <div class="h-full w-1/2 b-white text-black">
+      <div class="h-full w-1/2 bg-white text-black p-6">
         <!--
         Aquí va el formulario de pago (por implementar) 
         debe pedir la dirección de envío de la entrega y mostrar el total del carrito 
         al presionar el pagar entonces se crea la orden y los detalles orden además de la entrega 
         -->
+     <form @submit.prevent="crearOrden">
+        <div class="mb-4">
+          <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección de Envío</label>
+          <input
+            type="text"
+            id="direccion"
+            v-model="direccion"
+            class="bg-white mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <span class="block text-sm font-medium text-gray-700">Total: ${{ totalCarrito }}</span>
+        </div>
+        <button
+          type="submit"
+          class="bg-green-500 text-white px-4 py-2 rounded-lg hover:ring-1 hover:ring-green-400 hover:outline-none hover:border-green-400"
+        >
+          Pagar
+        </button>
+      </form>
     </div>
     </div>
   </template>

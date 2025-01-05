@@ -17,6 +17,7 @@ import DetalleEntrega from './components/Admin/DetalleEntrega.vue';
 import CarritoPay from './components/client/CarritoPay.vue';
 import {auth} from './services/authService';
 import ValorationProduct from './components/client/ValorationProduct.vue';
+import PagarCarro from './components/client/PagarCarro.vue';
 
 const routes= [
     {
@@ -74,6 +75,11 @@ const routes= [
                 component: DetallesOrden,
                 meta: { roles: ['CLIENT'] },
                 beforeEnter: auth
+            },
+            {
+                path: '/metodoPago',
+                name: 'MetodoPago',
+                component: PagarCarro
             }
         ]
     },
