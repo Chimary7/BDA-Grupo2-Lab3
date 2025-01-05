@@ -59,9 +59,9 @@ const closeConfirmPopup = () => {
   showConfirmPopup.value = false;
 };
 
-const deleteProduct = () => {
-  deleteProductByID(selectedProduct.value.id);
-  console.log('Producto borrado:', selectedProduct.value.id);
+const deleteProduct = async () => {
+  await deleteProductByID(selectedProduct);
+  console.log('Producto borrado:', selectedProduct);
   closeConfirmPopup();
   closePopup();
 };

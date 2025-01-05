@@ -32,21 +32,20 @@
   
   <script setup>
   import { ref, computed } from "vue";
+  import { useRouter } from 'vue-router';
   import { useStore } from "vuex";
   
   const store = useStore();
   
   const direccion = ref("");
   const metodoPago = ref("");
+  const router = useRouter();
   
-  const totalCarrito = computed(() => {
-    return store.state.carrito.reduce((total, item) => total + item.precio_unitario * item.cantidad, 0);
-  });
+  const totalCarrito = computed(() => store.state.carrito.reduce((total, item) => total + item.precio * item.cantidad, 0));
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // BOTON PENDIENTE DE IMPLEMENTAR
   const procesarPago = () => {
-    // Lógica para procesar el pago
-    console.log("Procesando pago con dirección:", direccion.value, "y método de pago:", metodoPago.value);
+    router.push({ name: "All" });
   };
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
   </script>

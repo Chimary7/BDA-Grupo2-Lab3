@@ -77,6 +77,7 @@ export const getProductByID = async (id) => {
 }
 
 export const editProduct = async (product) => {
+    console.log('Producto a editar:', product);
     try {
         const formattedProduct = {
             id: String(product.id),

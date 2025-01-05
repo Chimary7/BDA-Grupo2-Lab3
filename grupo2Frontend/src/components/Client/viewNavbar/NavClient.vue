@@ -2,27 +2,24 @@
 import Carrito from '../../../assets/carrito.png';
 import Orden from '../../../assets/order.png';
 import CerrarSecion from '../../../assets/Cerrar Secion.png';
+import { logout } from '../../../services/authService';
 import { useRouter } from 'vue-router';
-
+import { useStore } from 'vuex';
 const router = useRouter();
+const store = useStore();
 
 const VerOrdenes = () => {
     router.push({ name: 'OrderList' });
 }
 
-const CerrarSesion = () => {
-    try{
-        const response = logout();
-        console.log('Response:', response);
+const CerrarSesion = async () => {
+    const response = await logout();
+    console.log('Response:', response);
 
-        store.commit('logout');
-        store.commit('clearUser');
-        store.commit('clearOrder');
-        alert('Sesión cerrada exitosamente');
-        window.location.reload();
-    }catch(error){
-        alert('Error al cerrar sesión');
-    }
+    store.commit('logout');
+    store.commit('clearUser');
+    alert('Sesión cerrada exitosamente');
+    router.push({ name: 'All' });
 }
 
 const Pagar = () => {
