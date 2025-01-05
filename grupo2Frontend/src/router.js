@@ -15,6 +15,7 @@ import AllProductsAdmin from "./components/Admin/AllProductsAdmin.vue";
 import DetalleEntrega from './components/Admin/DetalleEntrega.vue';
 import CarritoPay from './components/client/CarritoPay.vue';
 import {auth} from './services/authService';
+import ValorationProduct from './components/client/ValorationProduct.vue';
 
 const routes= [
     {
@@ -39,6 +40,12 @@ const routes= [
                         path: 'category/:categoryName',
                         name: 'Category',
                         component: ProductsCategory,
+                        props: true
+                    },
+                    {
+                        path: 'ValorationProduct/:idProducto',
+                        name: 'ValorationProduct',
+                        component: ValorationProduct,
                         props: true
                     }
                 ]
