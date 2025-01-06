@@ -51,9 +51,9 @@ const fecha = (time) => {
   <!-- Solo renderiza cuando los datos estén disponibles -->
   <div v-else class="flex w-5/6">
     <!-- Asegúrate de que 'orden' y 'products' estén definidos antes de acceder a ellos -->
-    <div class="border border-gray-400 px-2 py-1 w-full h-64 mr-4 mb-4 rounded-2xl flex flex-col items-center" v-if="orden && orden.fecha_orden && orden.total">
+    <div class="border border-gray-400 px-2 py-1 w-full h-64 mr-4 mb-4 rounded-2xl flex flex-col items-center" v-if="orden && orden.fechaOrden && orden.total">
       <h2 class="text-center text-3xl mt-7 mb-6">Datos de la Orden</h2>
-      <p class="mb-2"><strong>Fecha:</strong> {{ fecha(orden.fecha_orden) }}</p>
+      <p class="mb-2"><strong>Fecha:</strong> {{ fecha(orden.fechaOrden) }}</p>
       <p class="mb-2"><strong>Total:</strong> ${{ orden.total }}</p>
       <p><strong>Estado:</strong> {{ orden.estado }}</p>
     </div>
