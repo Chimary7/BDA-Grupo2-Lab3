@@ -31,6 +31,7 @@ onMounted(async () => {
     console.log('user:', user);
     const response = await getOrdersByIdUser(user.id_user);
     orders.value = response.data;
+    console.log('orders:', orders.value);
   } catch (error) {
     console.error('Error al cargar órdenes:', error);
   } finally {
@@ -80,7 +81,7 @@ const changePage = (page) => {
             {{ (currentPage - 1) * pageSize + index + 1 }}
           </td>
           <td class="border border-gray-400 px-2 py-1 w-3/12">
-            {{ fecha(order.fecha_orden) }}
+            {{ fecha(order.fechaOrden) }}
           </td>
           <td class="border border-gray-400 px-2 py-1 w-4/12">
             ${{ order.total }}
@@ -88,7 +89,7 @@ const changePage = (page) => {
           <td class="border border-gray-400 px-2 py-1 w-4/12">
             <button
                 class="bg-blue-500 text-white px-2 py-1 rounded"
-                @click="DetailsOrder(order.idOrden)"
+                @click="DetailsOrder(order.id)"
             >
               Ver detalles
             </button>

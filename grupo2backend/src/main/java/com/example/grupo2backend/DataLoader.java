@@ -101,31 +101,13 @@ public class DataLoader implements CommandLineRunner {
         archivosProductoRepository.save(archivosProducto7);
 
         // Poblar datos de prueba para Orden
-        Orden orden1 = new Orden();
-        orden1.setIdOrden("1");
-        orden1.setFechaOrden(new Date());
-        orden1.setEstado("en_proceso");
-        orden1.setId_cliente("2");
-        orden1.setId_entrega("1");
-        orden1.setTotal(new BigDecimal("1220.00"));
+        Orden orden1 = new Orden("1", new Date(), "en_proceso", "2", "1", new BigDecimal("1220.00"));
         ordenRepository.save(orden1);
 
-        Orden orden2 = new Orden();
-        orden2.setIdOrden("2");
-        orden2.setFechaOrden(new Date());
-        orden2.setEstado("enviado");
-        orden2.setId_cliente("1");
-        orden2.setId_entrega("2");
-        orden2.setTotal(new BigDecimal("320.00"));
+        Orden orden2 = new Orden("2", new Date(), "enviado", "1", "2", new BigDecimal("320.00"));
         ordenRepository.save(orden2);
 
-        Orden orden3 = new Orden();
-        orden3.setIdOrden("3");
-        orden3.setFechaOrden(new Date());
-        orden3.setEstado("enviado");
-        orden3.setId_cliente("2");
-        orden3.setId_entrega("2");
-        orden3.setTotal(new BigDecimal("320.00"));
+        Orden orden3 = new Orden("3", new Date(), "enviado", "2", "2", new BigDecimal("320.00"));
         ordenRepository.save(orden3);
 
         // Poblar datos de prueba para DetalleOrden
