@@ -36,42 +36,41 @@ const User = store.getters.getUser;
 
 // Implementar la creación de orden
 const crearOrden = async () => {
-  const orden = {
-    id: Date.now().toString(),
-    fechaOrden: new Date(),
-    estado: "Pendiente",
-    idCliente: User.id_user,
-    idEntrega: Date.now().toString(),
-    total: totalCarrito.value
-  };
-
-  const detallesOrden = itemsCarrito.value.map(item => ({
-    id: Date.now().toString() + item.id,
-    idOrden: orden.id,
-    idProducto: item.id,
-    cantidad: item.cantidad,
-    precio_unitario: item.precio_unitario
-  }));
 
   const entrega = {
-    id: orden.idEntrega,
     idZona: "Zona 1",
-    idCliente: orden.idCliente,
+    idCliente: User.id_user,
     coordenadaDireccion: { type: "Point", coordinates: [40.7128, -74.0060] },
     direccion: direccion.value,
     estado: "En camino"
   };
 
   try {
-    await saveOrden(orden);
-    for (const detalle of detallesOrden) {
-      await saveDetalleOrden(detalle);
-    }
-    await saveEntrega(entrega);
+    const saveentrega= await saveEntrega(entrega);
+    const orden = {
+      idCliente: User.id_user,
+      idEntrega: saveentrega,
+      fechaOrden: new Date(),
+      estado: "Pendiente",
+      total: totalCarrito.value
+    };
+    const responseOrden = await saveOrden(orden);
 
-    console.log("Orden:", orden);
-    console.log("Detalles de la Orden:", detallesOrden);
-    console.log("Entrega:", entrega);
+    const detallesOrden = itemsCarrito.value.map(item => ({
+      idProducto: item.id,
+      cantidad: item.cantidad,
+      precio: item.precio
+    }));
+
+    for (const detalle of detallesOrden) {
+      const data = {
+        idOrden: responseOrden,
+        idProducto: detalle.idProducto,
+        cantidad: detalle.cantidad,
+        precio: detalle.precio
+      };
+      await saveDetalleOrden(data);
+    }
 
     router.push({ name: 'MetodoPago' });
   } catch (error) {

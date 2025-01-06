@@ -16,8 +16,8 @@ public class OrdenController {
 
     @PostMapping("/")
     @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
-    public void saveOrden(@RequestBody Orden orden){
-        ordenService.saveOrden(orden);
+    public String saveOrden(@RequestBody Orden orden) {
+        return ordenService.saveOrden(orden);
     }
 
     @GetMapping("/")

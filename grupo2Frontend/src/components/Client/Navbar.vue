@@ -1,11 +1,17 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { verifyToken } from '../../services/authService.js';import Logo from '../../assets/LOGO.png';
+import { useStore  } from 'vuex';
 import Public from './viewNavbar/NavPublic.vue';
 import Client from './viewNavbar/NavClient.vue';
 
 const tokenValid = ref(false);
 const role = ref(''); 
+
+const store = useStore();
+
+// Computed para observar el estado `login` desde Vuex
+const isLoggedIn = computed(() => store.getters.getLogin);
 
 // Función para verificar el token
 const verify = async () => {
@@ -16,12 +22,19 @@ const verify = async () => {
       role.value = response.role;
     } else {
       tokenValid.value = false;
+      role.value = '';
     }
   } catch (error) {
     console.error('Error al verificar el token:', error);
     tokenValid.value = false;
   }
 };
+
+watch(isLoggedIn, (value) => {
+  if (value) {
+    verify();
+  }
+});
 
 // Verificar token cuando el componente se monta
 onMounted(() => {
@@ -38,7 +51,7 @@ onMounted(() => {
                 <p class="w-auto h-full flex items-center font-bold">Ecommerce</p>
             </div>
             <div class="h-full p-2">
-                <Public v-if="!tokenValid || role == 'ADMIN'" />
+                <Public v-if="!isLoggedIn || role == 'ADMIN'" />
                 <Client v-else />
             </div>
         </div>
