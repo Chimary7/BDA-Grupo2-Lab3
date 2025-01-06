@@ -12,13 +12,12 @@ public class OrdenService {
     @Autowired
     private OrdenRepository ordenRepository;
 
-    public Boolean saveOrden(Orden orden) {
-        try{
-            ordenRepository.save(orden);
-            return true;
-        }
-        catch(Exception e){
-            return false;
+    public String saveOrden(Orden orden) {
+        try {
+            Orden savedOrden = ordenRepository.save(orden);
+            return savedOrden.getId();
+        } catch (Exception e) {
+            return null;
         }
     }
 

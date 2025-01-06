@@ -18,13 +18,13 @@ const CerrarSesion = async () => {
 
     store.commit('logout');
     store.commit('clearUser');
+    
     alert('Sesión cerrada exitosamente');
     router.push({ name: 'All' });
 }
 
 const Pagar = () => {
-    router.push({ name: 'Carrito', params: { id: 1 } }); // PLACEHOLDER -> VER COMO REDIGIR CON LA ID DEL CLIENTE
-    router.push({ name: 'Pagar' });
+    router.push({ name: 'Carrito' });
 }
 </script>
 <template>

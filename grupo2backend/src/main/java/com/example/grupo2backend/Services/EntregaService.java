@@ -16,10 +16,9 @@ public class EntregaService {
 
     public ResponseEntity<Object> guardar(Entrega entrega) {
         try {
-            entregaRepository.save(entrega);
-            return new ResponseEntity<>("Se ingresó correctamente la entrega", HttpStatus.CREATED);
+            Entrega savedEntrega = entregaRepository.save(entrega);
+            return new ResponseEntity<>(savedEntrega.getId(), HttpStatus.CREATED);
         } catch (Exception e) {
-            // Manejo del error
             return new ResponseEntity<>("Error al ingresar la entrega: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

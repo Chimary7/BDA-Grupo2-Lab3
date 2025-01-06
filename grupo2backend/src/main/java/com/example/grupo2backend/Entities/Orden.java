@@ -10,20 +10,29 @@ public class Orden {
     private String id;
     private Date fechaOrden;
     private String estado;
-
     private String idCliente;
     private String idEntrega;
     private BigDecimal total;
 
-    public String getIdOrden() {
+
+    public Orden(String id, Date fechaOrden, String estado, String idCliente, String idEntrega, BigDecimal total) {
+        this.id = id;
+        this.fechaOrden = fechaOrden;
+        this.estado = estado;
+        this.idCliente = idCliente;
+        this.idEntrega = idEntrega;
+        this.total = total;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setIdOrden(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Date getFecha_orden() {
+    public Date getFechaOrden() {
         return fechaOrden;
     }
 
@@ -39,24 +48,20 @@ public class Orden {
         this.estado = estado;
     }
 
-    public String getId_cliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setId_cliente(String idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 
-    public void setFecha_orden(Date fecha_orden) {
-        this.fechaOrden = fecha_orden;
-    }
-
-    public String getId_entrega() {
+    public String getIdEntrega() {
         return idEntrega;
     }
 
-    public void setId_entrega(String id_entrega) {
-        this.idEntrega = id_entrega;
+    public void setIdEntrega(String idEntrega) {
+        this.idEntrega = idEntrega;
     }
 
     public BigDecimal getTotal() {
